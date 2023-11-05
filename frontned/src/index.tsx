@@ -3,13 +3,45 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {Simulate} from "react-dom/test-utils";
+import compositionUpdate = Simulate.compositionUpdate;
+import {createBrowserRouter, Navigate, NavLink, RouterProvider} from "react-router-dom";
+import Auth from "./Pages/Auth/Auth";
+import Game from "./Pages/Game/Game";
+import Profile from "./Pages/Profile/Profile";
+import Info from "./Pages/Info/Info";
+
+const router = createBrowserRouter([
+    {
+        path: "*",
+        element: <div> <Navigate to={"auth"}/> </div>
+    },
+    {
+        path: "auth",
+        element: <Auth/>
+    },
+    {
+        path: "game",
+        element: <Game/>
+    },
+    {
+        path: "Profile",
+        element: <Profile/>
+    },
+    {
+        path: "Info",
+        element: <Info/>
+    },
+])
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-    <App />
+      <RouterProvider router={router} />
   </React.StrictMode>
 );
 
