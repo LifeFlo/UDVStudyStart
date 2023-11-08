@@ -16,3 +16,87 @@
  left: 0;
  overflow: auto;
 }
+
+.background{
+ background-image: url("../img/fon7.png");
+ background-size: cover;
+ height: 832px;
+}
+
+.text{
+ color: white;
+ margin: 0;
+}
+
+.btnImg1{
+ background-image: url("../img/1.png");
+ background-color: transparent;
+ width: 145px;
+ height: 117px;
+ padding: 0;
+ border: 0;
+ margin-left: 480px;
+ background-size: cover;
+}
+
+.btnImg2{
+ background-image: url("../img/2.png");
+ background-color: transparent;
+ width: 70px;
+ height: 70px;
+ padding: 0;
+ border: 0;
+ margin-left: 650px;
+ margin-top: 70px;
+ float: left;
+ background-size: cover;
+}
+
+.btnImg3{
+ background-image: url("../img/3.png");
+ background-color: transparent;
+ width: 189px;
+ height: 127px;
+ padding: 0;
+ border: 0;
+ margin-top: 80px;
+ margin-left: 150px;
+ background-size: cover;
+}
+
+.btnImg4{
+ background-image: url("../img/4.png");
+ background-color: transparent;
+ width: 180px;
+ height: 176px;
+ padding: 0;
+ border: 0;
+ margin-top: 111px;
+ margin-left: 890px;
+ background-size: cover;
+}
+
+.btnImg5{
+ background-image: url("../img/5.png");
+ background-color: transparent;
+ width: 190px;
+ height: 194px;
+ padding: 0;
+ border: 0;
+ margin-top: 20px;
+ margin-left: 330px;
+ background-size: cover;
+}
+
+.btnImg6{
+ background-image: url("../img/6.png");
+ background-color: transparent;
+ width: 128px;
+ height: 128px;
+ padding: 0;
+ border: 0;
+ margin-top: 200px;
+ float: right;
+ margin-right: 140px;
+ background-size: cover;
+}
