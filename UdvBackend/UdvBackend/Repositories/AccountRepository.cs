@@ -1,10 +1,10 @@
+using EduControl;
 using EduControl.Controllers.Model;
 using EduControl.DataBase;
 using EduControl.DataBase.ModelBd;
 using Microsoft.EntityFrameworkCore;
-using UdvBackend.Repositories;
 
-namespace EduControl.Repositories;
+namespace UdvBackend.Repositories;
 
 public class AccountRepository : IAccountRepository
 {
@@ -22,7 +22,7 @@ public class AccountRepository : IAccountRepository
             var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Id == token.UsedId);
             return account switch
             {
-                null => new Result<Account, GetError>(GetError.NotFound, "book not found"),
+                null => new Result<Account, GetError>(GetError.NotFound, "Account not found"),
                 _ => new Result<Account, GetError>(account)
             };
         }
@@ -34,7 +34,7 @@ public class AccountRepository : IAccountRepository
 
     public async Task<Result<Account, GetError>> Get(string userName)
     {
-        var account = await _db.Accounts.FirstOrDefaultAsync(x => x.UserName == userName);
+        var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Name == userName);
         return account switch
         {
             null => new Result<Account, GetError>(GetError.NotFound, "account not found"),

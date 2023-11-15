@@ -5,30 +5,31 @@ using Microsoft.AspNetCore.Mvc;
 using UdvBackend.DataBase.Entities.Account;
 using UdvBackend.Repositories;
 
-namespace UdvBackend.Controllers.Registered;
+namespace UdvBackend.Controllers.AdminController;
 
 [ApiController]
-[Route("api/user/create")]
-public class AccountsController
+[Route("api/admin")]
+public class AdminController
 {
-    private readonly IAccountRepository _accounts;
     private readonly IRoleRepository _roles;
-    public AccountsController(IAccountRepository accounts, IRoleRepository roles)
-    {
-        _accounts = accounts;
-        _roles = roles;
-    }
+    private readonly IAccountRepository _accounts;
 
-    [HttpPost]
+    public AdminController(IRoleRepository roles, IAccountRepository accounts)
+    {
+        _roles = roles;
+        _accounts = accounts;
+    }
+    
+    [HttpPost("create/admin")]
     public async Task<ApiResult<string>> Post([FromBody] RequestNewAccount newAccount)
     {
         var user = await _accounts.Get(newAccount.Name);
         if (user.Value != null) return "username is busy";
-        var role = await _roles.Get(Roles.User);
+        var role = await _roles.Get(Roles.Admin);
         if (role == null)
         {
-            await _roles.Add(Role.From(Roles.User));
-            role = await _roles.Get(Roles.User);
+            await _roles.Add(Role.From(Roles.Admin));
+            role = await _roles.Get(Roles.Admin);
         }
                        
         
@@ -37,7 +38,5 @@ public class AccountsController
         
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
     }
-    
-    
     
 }

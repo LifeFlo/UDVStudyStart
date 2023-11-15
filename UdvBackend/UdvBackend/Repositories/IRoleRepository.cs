@@ -5,7 +5,8 @@ namespace UdvBackend.Repositories;
 
 public interface IRoleRepository
 {
-    public Task Link(string role, Account account);
+    public Task Link(Role role, Guid account);
     public Task Add(Role role);
     public Task<Role?> Get(string role);
+    public Task<Role?> Get(Guid id);
 }

@@ -4,7 +4,7 @@ using EduControl.DataBase.ModelBd;
 
 namespace EduControl.Controllers.Model;
 
-[Table("token", Schema = "UdvStart")] 
+[Table("token", Schema = "udv_start")] 
 public class Token
 {
     [Column("value")] [Key] public string Value { get; set; }

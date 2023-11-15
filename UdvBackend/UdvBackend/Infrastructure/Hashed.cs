@@ -5,7 +5,7 @@ namespace EduControl;
 
 public static class Hasher
 {
-    public static string Password(string password)
+    public static string HashPassword(string password)
     {
         byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
         Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");

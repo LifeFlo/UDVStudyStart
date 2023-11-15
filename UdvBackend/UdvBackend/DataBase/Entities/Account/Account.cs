@@ -6,11 +6,12 @@ using UdvBackend.DataBase.Entities.Account;
 
 namespace EduControl.DataBase.ModelBd;
 
-[Table("account", Schema = "UdvStart")]
+[Table("account", Schema = "udv_start")]
 public class Account
 {
     [Column("id")] [Key] public Guid Id { get; set; }
-    [Column("user_name")] public string UserName { get; set; }
+    [Column("name")] public string Name { get; set; }
+    [Column("surname")] public string Surname { get; set; }
     [Column("email")] public string Email { get; set; }
     [Column("password_hash")] public string PasswordHash { get; set; }
     [Column("role_id")] public Guid RoleId { get; set; }
@@ -19,8 +20,8 @@ public class Account
         => new()
         {
             Email = entity.Email,
-            PasswordHash = Hasher.Password(entity.Password),
-            UserName = entity.UserName,
+            PasswordHash = Hasher.HashPassword(entity.Password),
+            Name = entity.Name,
             Id = Guid.NewGuid(),
             RoleId = role.Id
         };
