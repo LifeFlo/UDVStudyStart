@@ -8,7 +8,7 @@ using UdvBackend.Repositories;
 namespace UdvBackend.Controllers.Registered;
 
 [ApiController]
-[Route("api/user/create")]
+[Route("api/create/user")]
 public class AccountsController
 {
     private readonly IAccountRepository _accounts;
@@ -37,7 +37,4 @@ public class AccountsController
         
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
     }
-    
-    
-    
 }
