@@ -8,11 +8,13 @@ namespace EduControl.MiddleWare;
 public class MiddleWareIsAdmin
 {
     private static readonly ApiResult<Account>
-        IsNotAdmin = new("auth:not-admin", string.Empty, 401);
+        NotAdmin = new("auth:not-admin", string.Empty, 401);
+    
+    
     private readonly RequestDelegate _next;
     private readonly IRoleRepository _roles;
     private readonly ILog _log;
-
+    
     public MiddleWareIsAdmin(IRoleRepository roles, ILog log, RequestDelegate next)
     {
         _roles = roles;
@@ -22,10 +24,11 @@ public class MiddleWareIsAdmin
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
+        _log.Info("run middleWareIsAdmin");
         var role = await _roles.Get(accountScope.Account.RoleId);
         if (!role.IsAdmin())
         {
-            await context.Response.WriteAsJsonAsync(IsNotAdmin);
+            await context.Response.WriteAsJsonAsync(NotAdmin);
             return;
         }
 

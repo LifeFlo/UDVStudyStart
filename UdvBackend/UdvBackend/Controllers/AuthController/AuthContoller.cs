@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using EduControl.Controllers.Model;
 using EduControl.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UdvBackend.Repositories;
 using Vostok.Logging.Abstractions;
@@ -9,7 +10,7 @@ using Vostok.Logging.Abstractions;
 namespace EduControl.Controllers;
 
 [ApiController]
-[Route("/Auth")]
+[Route("api/Auth")]
 public class AuthController: ControllerBase
 {
     private readonly ILog _log;
@@ -33,8 +34,9 @@ public class AuthController: ControllerBase
         }
         
         var account = response.Value;
-        if (account.PasswordHash != Hasher.HashPassword(requestUser.Password))
+        if (Hasher.VerifyPassword(account ,requestUser.Password) == PasswordVerificationResult.Failed)
         {
+            _log.Info($"user: {account.Name} write Wrong password");
             return new ApiResult<string>("Wrong password", string.Empty, 403);
         }
         

@@ -31,6 +31,18 @@ var app = builder.Build();
 
 await app.AddBaseRoles();
 
+app.UseCors(_ =>
+{
+    _.AllowAnyOrigin();
+    _.AllowAnyHeader();
+});
+
+
+app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/admin"), c =>
+{
+    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseMiddleware<MiddleWareIsAdmin>();
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -39,7 +51,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
 
 app.MapControllers();

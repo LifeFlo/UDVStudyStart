@@ -9,7 +9,7 @@ public class Role
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("name")] public string Name { get; set; }
 
-    public static Role? From(string role)
+    public static Role From(string role)
     {
         return new Role
         {

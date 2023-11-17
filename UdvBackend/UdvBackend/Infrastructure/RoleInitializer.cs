@@ -30,11 +30,15 @@ public class RoleInitializer
             Email = BaseAdminEmail,
             Password = BasePasswordAdmin
         };
+        
         var adminRole = await roles.Get(Roles.Admin);
         if (adminRole == null)
         {
             throw new Exception("RoleAdmin not Created");
         }
+
+        var admin = await accounts.Get("Nikita");
+        if (admin.Value != null) return;
         
         var account = Account.From(newUser, adminRole);
         await accounts.Add(account);
