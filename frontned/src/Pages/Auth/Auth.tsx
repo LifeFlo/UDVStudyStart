@@ -1,3 +1,10 @@
+import {useEffect, useState} from "react";
+import {IResponse} from "../../Infrastructure/IResponse";
+
+interface UserAuth {
+    name: string,
+    password: string
+}
 export default function Auth() {
     return(
         <div>

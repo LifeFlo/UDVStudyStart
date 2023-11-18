@@ -2,7 +2,7 @@ import ModalWithCompanion from "../../component/ModalWithCompanion";
 import styles from "../../component/modal.module.css";
 import React from "react";
 import {useState} from "react";
-import {text} from "stream/consumers";
+import {createPortal} from "react-dom";
 export default function Game() {
     const [isOpen, setIsOpen] = useState(false)
 
@@ -23,8 +23,8 @@ export default function Game() {
                 <button className={styles.btnImg5} onClick={() => setIsOpen(!isOpen)}></button>
             </div>
 
-            {isOpen && <ModalWithCompanion  Header={"Приветсвтенная речь"}
-                                            paragraph={"Равным образом тыры пыры тыры пыры"}/>
+            {isOpen && createPortal(<ModalWithCompanion  Header={"Приветсвтенная речь"}
+                                                         paragraph={"Равным образом тыры пыры тыры пыры"}/>, document.body)
             }
         </div>
     );
