@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using EduControl.Controllers.Model;
 using EduControl.Repositories;
+using EduControl.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using UdvBackend.Repositories;
@@ -36,7 +37,7 @@ public class AuthController: ControllerBase
         var account = response.Value;
         if (Hasher.VerifyPassword(account ,requestUser.Password) == PasswordVerificationResult.Failed)
         {
-            _log.Info($"user: {account.Name} write Wrong password");
+            _log.Info($"user: {account.Name} write wrong password");
             return new ApiResult<string>("Wrong password", string.Empty, 403);
         }
         

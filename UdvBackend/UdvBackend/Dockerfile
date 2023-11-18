@@ -5,10 +5,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["UdvBackend/UdvBackend.csproj", "UdvBackend/"]
-RUN dotnet restore "UdvBackend/UdvBackend.csproj"
+COPY ["UdvBackend.csproj", "./"]
+RUN dotnet restore "UdvBackend.csproj"
 COPY . .
-WORKDIR "/src/UdvBackend"
+WORKDIR "/src/"
 RUN dotnet build "UdvBackend.csproj" -c Release -o /app/build
 
 FROM build AS publish
