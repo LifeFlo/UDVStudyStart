@@ -1,3 +1,4 @@
+import styles from "./TextInModal.module.css"
 
 interface props {
     Header: string,
@@ -5,8 +6,8 @@ interface props {
 }
 export default function TextInModal(props: props) {
     return (
-        <div>
-            <h1>{props.Header}</h1>
+        <div className={styles.content} >
+            <h1 className={styles.header}>{props.Header}</h1>
             <p>{props.Paragraph}</p>
         </div>
     )

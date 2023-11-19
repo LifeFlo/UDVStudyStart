@@ -1,13 +1,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EduControl.Controllers.Model;
+using EduControl.DataBase.ModelBd.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using UdvBackend.DataBase.Entities.Account;
 
 namespace EduControl.DataBase.ModelBd;
 
 [Table("account", Schema = "udv_start")]
-public class Account
+public class Account : IEntity<Guid>
 {
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("name")] public string Name { get; set; }

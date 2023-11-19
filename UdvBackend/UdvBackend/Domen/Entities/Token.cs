@@ -1,10 +1,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using EduControl.DataBase.ModelBd;
+using EduControl.DataBase.ModelBd.Entities;
 
 namespace EduControl.Controllers.Model;
 
-[Table("token", Schema = "udv_start")] 
+[Table("token", Schema = "udv_start")]
 public class Token
 {
     [Column("value")] [Key] public string Value { get; set; }

@@ -1,10 +1,35 @@
+:root {
+ --color-importing-text: #00D29D;
+}
+
 .modal {
- aspect-ratio: 16/9;
+ aspect-ratio: 20/9;
  background-color: #ffffff;
  position: relative;
  top: 15%;
  left: 25%;
- height: 500px;
+ height: 50%;
+ border-radius: 10px;
+}
+
+.modalNameCompanion {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ background-color: white;
+ aspect-ratio: 24/9;
+ position: relative;
+ left: 25%;
+ top: 8%;
+ height: 6%;
+ border-radius: 10px;
+
+ .nameCompanion {
+  font-size: 150%;
+  color: var(--color-importing-text);
+ }
+
 }
 
 .parent {
