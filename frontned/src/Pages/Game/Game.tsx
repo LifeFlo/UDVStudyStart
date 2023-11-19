@@ -23,8 +23,11 @@ export default function Game() {
                 <button className={styles.btnImg5} onClick={() => setIsOpen(!isOpen)}></button>
             </div>
 
-            {isOpen && <ModalWithCompanion  Header={"Приветсвтенная речь"}
-                                            paragraph={"Равным образом тыры пыры тыры пыры"}/>
+            {isOpen &&
+                <ModalWithCompanion
+                    Header={"Приветсвтенная речь"}
+                    paragraph={"Равным образом тыры пыры тыры пыры"}
+                />
             }
         </div>
     );

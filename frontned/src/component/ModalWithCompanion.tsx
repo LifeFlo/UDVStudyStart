@@ -11,6 +11,7 @@ export default function ModalWithCompanion (props: props) {
         <div className={styles.parent}>
             <Modal className={styles.modal} isOpen>
                 <TextInModal Header={props.Header} Paragraph={props.paragraph}/>
+                <button>Дальше</button>
             </Modal>
         </div>
     )// кидать через childer возможно не самое лучшее решение

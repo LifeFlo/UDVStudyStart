@@ -1,8 +1,14 @@
+import Typography from '@mui/material/Typography';
+import React from 'react';
+import { AuthForm } from '../../component/AuthForm'
+import styles from "../../component/modal.module.css";
+
+
+
 export default function Auth() {
     return(
-        <div>
-            <h1>Старница авторизаций</h1>
-            <p> авторизация ааааа</p>
+        <div className={styles.auth}>
+            <AuthForm />
         </div>
     )
 }

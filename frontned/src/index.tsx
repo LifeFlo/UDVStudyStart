@@ -6,6 +6,19 @@ import Auth from "./Pages/Auth/Auth";
 import Game from "./Pages/Game/Game";
 import Profile from "./Pages/Profile/Profile";
 import Info from "./Pages/Info/Info";
+import {BrowserRouter} from "react-router-dom";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import Bonus from "./Pages/Bonus";
+import Contacts from "./Pages/Contacts";
+import Documents from "./Pages/Documents";
+import JobWithUniv from "./Pages/JobWithUniv";
+import ProfilHR from "./Pages/ProfilHR";
+import Sience from "./Pages/Sience";
+
+
 
 const router = createBrowserRouter([
     {
@@ -28,6 +41,30 @@ const router = createBrowserRouter([
         path: "Info",
         element: <Info/>
     },
+    {
+        path: "Bonus",
+        element: <Bonus/>
+    },
+    {
+        path: "Contacts",
+        element: <Contacts/>
+    },
+    {
+        path: "Documents",
+        element: <Documents/>
+    },
+    {
+        path: "JobWithUniv",
+        element: <JobWithUniv/>
+    },
+    {
+        path: "ProfilHR",
+        element: <ProfilHR/>
+    },
+    {
+        path: "Sience",
+        element: <Sience/>
+    }
 ])
 
 
