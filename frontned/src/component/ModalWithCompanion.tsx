@@ -21,6 +21,7 @@ export default function ModalWithCompanion (props: props) {
             <Modal className={styles.modal} style={customStyles} isOpen portalClassName={styles.outerModal}>
 
                 <TextInModal Header={props.Header} Paragraph={props.paragraph}/>
+                <button>Дальше</button>
             </Modal>
 
         </div>

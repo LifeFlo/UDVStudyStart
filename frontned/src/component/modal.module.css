@@ -124,3 +124,162 @@
  margin-right: 140px;
  background-size: cover;
 }
+
+.auth{
+ background-color: #282c34;
+}
+
+.authForm{
+ width: 1180px;
+ height: 100vh;
+ background-color: white;
+ margin-left: 180px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+}
+
+.authFormSub{
+ color: rgb(180, 184, 193);
+}
+
+.authFormForm{
+ width: 360px;
+}
+
+.nav{
+ list-style-type: none;
+ margin: 0;
+ padding-top: 10px;
+ width: 170px;
+ background-color: #282c34;
+ position: fixed;
+ height: 100%;
+ overflow: auto;
+}
+
+.navLogo{
+ padding-left: 15px;
+ color: white;
+}
+
+.navLink{
+ color: white;
+ text-decoration: none;
+}
+
+li{
+ display: block;
+ color: #000;
+ padding: 8px 16px;
+ text-decoration: none;
+}
+
+.h1Prof{
+ margin: 0;
+ margin-left:170px;
+ padding:1px 16px;
+}
+
+.cardLk {
+ margin-top: 60px;
+ margin-left:250px;
+ width: 1200px;
+ height: 680px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #1E1A1A;
+}
+
+.cardAva{
+ width: 261px;
+ height: 156px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #FFF;
+ float: left;
+ margin: 20px;
+}
+
+.avaPic{
+ background-image: url("../img/ава.png");
+ width: 143px;
+ height: 143px;
+ flex-shrink: 0;
+ position: absolute;
+ top: 50px;
+ left: 325px;
+}
+
+.name{
+ margin-top: 70px;
+ width: 250px;
+ margin-left: 25px;
+}
+
+.job{
+ margin: 0;
+ margin-left: 25px;
+}
+
+.cardNast{
+ width: 691px;
+ height: 256px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #FFF;
+ float: left;
+ margin: 20px;
+}
+
+.infoNast{
+ position: absolute;
+ top: 125px;
+ left: 860px;
+}
+
+.learn{
+ width: 691px;
+ height: 323px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #FFF;
+ float: left;
+ margin: 20px;
+ margin-left: 320px;
+}
+
+.firstCard{
+ width: 245px;
+ height: 115px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #ECECEC;
+ float: left;
+ margin: 20px;
+}
+
+.notesCard{
+ width: 245px;
+ height: 115px;
+ position: absolute;
+ top: 550px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #ECECEC;
+ float: left;
+ margin: 20px;
+}
+
+.progressCard{
+ width: 691px;
+ height: 323px;
+ flex-shrink: 0;
+ border-radius: 7px;
+ background: #ECECEC;
+ float: left;
+ margin: 20px;
+ margin-left: 320px;
+}
