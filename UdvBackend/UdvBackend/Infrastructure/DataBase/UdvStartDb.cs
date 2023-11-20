@@ -13,6 +13,6 @@ public class UdvStartDb : DbContext
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=UdvStart;Username=dev;Password=123123");
+        optionsBuilder.UseNpgsql("Host=postgres;Port=5432;Database=UdvStart;Username=dev;Password=123123");
     }
 }
