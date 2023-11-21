@@ -11,3 +11,4 @@ export  interface IFakeData{
     fio: string
     mail: string
 }
+
