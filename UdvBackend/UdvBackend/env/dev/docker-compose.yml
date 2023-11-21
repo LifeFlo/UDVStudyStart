@@ -4,11 +4,20 @@ services:
   postgres:
     image: postgres:15
     container_name: postgres-dev
-    environment: 
+    environment:
       POSTGRES_DB: "UdvStart"
       POSTGRES_USER: "dev"
       POSTGRES_PASSWORD: "123123"
     volumes:
+      - ./init/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./data/:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  backend:
+    depends_on: 
+      - postgres
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
