@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from "react";
-import styles from "../component/modal.module.css"
+import styles from "../../modal.module.css"
 import Button from "@mui/material/Button";
 
 const Defoult_todo ={

@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useForm, Controller, SubmitHandler, useFormState} from "react-hook-form";
-import styles from "./modal.module.css"
+import styles from "../modal.module.css"
 
 interface ISignInForm{
     login: string;

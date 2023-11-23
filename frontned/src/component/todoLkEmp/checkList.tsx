@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ITask} from "../models";
+import {ITask} from "../../models";
 
 interface TaskProps{
     task: ITask
