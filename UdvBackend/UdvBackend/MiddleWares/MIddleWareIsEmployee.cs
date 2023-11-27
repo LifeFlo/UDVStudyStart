@@ -5,17 +5,17 @@ using Vostok.Logging.Abstractions;
 
 namespace EduControl.MiddleWare;
 
-public class MiddleWareIsAdmin
+public class MiddleWareIsEmployee
 {
     private static readonly ApiResult<Account>
-        NotAdmin = new("auth:not-admin", string.Empty, 401);
+        NotEmployee = new("auth:not-employee", string.Empty, 401);
     
     
     private readonly RequestDelegate _next;
     private readonly IRoleRepository _roles;
     private readonly ILog _log;
     
-    public MiddleWareIsAdmin(IRoleRepository roles, ILog log, RequestDelegate next)
+    public MiddleWareIsEmployee(IRoleRepository roles, ILog log, RequestDelegate next)
     {
         _roles = roles;
         _log = log;
@@ -24,12 +24,13 @@ public class MiddleWareIsAdmin
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
-        _log.Info("run middleWareIsAdmin");
         var role = await _roles.Get(accountScope.Account.RoleId);
-        if (role == null) throw new Exception("Role not existed"); // todo: весь код повторяется как в IsEmployee
+        if (role == null) throw new Exception("Role not existed");
+        
+        
         if (!role.IsHR())
         {
-            await context.Response.WriteAsJsonAsync(NotAdmin);
+            await context.Response.WriteAsJsonAsync(NotEmployee);
             return;
         }
 

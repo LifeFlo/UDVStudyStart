@@ -2,7 +2,7 @@ namespace UdvBackend;
 
 public static class Roles
 {
-    public static string User { get; } = "User";
-    public static string Admin { get; } = "Admin";
+    public static string Employee { get; } = "Employee";
+    public static string HR { get; } = "HR";
 }
 

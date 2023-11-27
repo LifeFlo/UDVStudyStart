@@ -4,6 +4,9 @@ namespace UdvBackend.Infrastructure.Extnentions;
 
 public static class RoleExtensions
 {
-    public static bool IsAdmin(this Role? role)
-        => role.Name == Roles.Admin;
+    public static bool IsHR(this Role role)
+        => role.Name == Roles.HR;
+
+    public static bool IsEmployee(this Role role)
+        => role.Name == Roles.Employee;
 }

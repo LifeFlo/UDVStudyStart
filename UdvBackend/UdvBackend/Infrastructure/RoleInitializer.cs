@@ -12,26 +12,26 @@ public class RoleInitializer
     private static readonly string BaseAdminEmail = "turnickii.n@gmail.com";
     public static async Task InitializeAsync(IRoleRepository roles, IAccountRepository accounts)
     {
-        if (await roles.Get(Roles.Admin) == null)
+        if (await roles.Get(Roles.HR) == null)
         {
-            var role = Role.From(Roles.Admin);
+            var role = Role.From(Roles.HR);
             await roles.Add(role);
         }
      
-        if (await roles.Get(Roles.User) == null)
+        if (await roles.Get(Roles.Employee) == null)
         {
-            var role = Role.From(Roles.User);
+            var role = Role.From(Roles.Employee);
             await roles.Add(role);
         }
 
-        var newUser = new RequestNewAccount()
+        var newUser = new RequestNewHr()
         {
             Name = BaseAdminName,
             Email = BaseAdminEmail,
             Password = BasePasswordAdmin
         };
         
-        var adminRole = await roles.Get(Roles.Admin);
+        var adminRole = await roles.Get(Roles.HR);
         if (adminRole == null)
         {
             throw new Exception("RoleAdmin not Created");

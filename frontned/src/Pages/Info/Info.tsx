@@ -1,9 +1,6 @@
 import React from "react";
 import {Product} from "../../component/AboutMainComp";
 import {products} from "../../data/aboutMain";
-import Profile from "../Profile/Profile";
-import Game from "../Game/Game";
-import {Route, Routes} from 'react-router-dom'
 import {NavigationsForMainPage} from "../../component/NavigationsForMainPage";
 
 export default function Info() {

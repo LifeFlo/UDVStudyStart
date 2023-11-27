@@ -1,6 +1,6 @@
 namespace EduControl.Controllers.Model;
 
-public class RequestNewAccount
+public class RequestNewHr
 {
     public string Name { get; set; }
     public string Password { get; set; }

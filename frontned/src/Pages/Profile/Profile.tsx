@@ -1,6 +1,5 @@
 import {NavigationForLK} from "../../component/NavigationForLK"
 import {Route, Routes} from "react-router-dom";
-import Game from "../Game/Game";
 import React, {useEffect, useState} from "react";
 import Info from "../Info/Info";
 import styles from "../../component/modal.module.css";
@@ -10,7 +9,7 @@ import {task} from "../../data/checkListData";
 
 const src = "https://jsonplaceholder.typicode.com/posts"
 
-export default function Profile() {
+export  function Profile() {
     const [value, setValue] = useState([])
     useEffect(() => {
         axios

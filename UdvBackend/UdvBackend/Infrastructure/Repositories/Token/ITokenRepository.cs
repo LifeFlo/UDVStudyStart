@@ -1,5 +1,6 @@
 using EduControl.Controllers.Model;
 using EduControl.DataBase.ModelBd;
+using UdvBackend.Infrastructure.Result;
 
 namespace EduControl.Repositories;
 

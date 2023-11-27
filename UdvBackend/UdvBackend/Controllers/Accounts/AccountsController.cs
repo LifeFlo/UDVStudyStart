@@ -20,19 +20,19 @@ public class AccountsController
     }
 
     [HttpPost]
-    public async Task<ApiResult<string>> Post([FromBody] RequestNewAccount newAccount)
+    public async Task<ApiResult<string>> Post([FromBody] RequestNewHr newHr)
     {
-        var user = await _accounts.Get(newAccount.Name);
+        var user = await _accounts.Get(newHr.Name);
         if (user.Value != null) return "username is busy";
-        var role = await _roles.Get(Roles.User);
+        var role = await _roles.Get(Roles.Employee);
         if (role == null)
         {
-            await _roles.Add(Role.From(Roles.User));
-            role = await _roles.Get(Roles.User);
+            await _roles.Add(Role.From(Roles.Employee));
+            role = await _roles.Get(Roles.Employee);
         }
                        
         
-        var account = Account.From(newAccount, role);
+        var account = Account.From(newHr, role);
         await _accounts.Add(account);
         
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
