@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from "./modal.module.css";
-import {TodoItem} from "./todoItem";
+import styles from "../../modal.module.css";
+import {TodoItem} from "../todoItem/todoItem";
 
 interface TodoListProps {
     todos: Todo[];

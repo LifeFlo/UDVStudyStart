@@ -3,9 +3,9 @@ import {fakeDatas} from "../data/fakeData";
 import type {Scrollbar as BaseScrollbar} from "smooth-scrollbar/scrollbar";
 import styles from "../component/modal.module.css";
 import {Scrollbar} from "smooth-scrollbar-react";
-import {Header} from "../component/headerNoteHr";
-import {TodoPanel} from "../component/todoPanel";
-import {TodoListHR} from "../component/todoListHR";
+import {Header} from "../component/todoHR/todoHeader/headerNoteHr";
+import {TodoPanel} from "../component/todoHR/todoPanel/todoPanel";
+import {TodoListHR} from "../component/todoHR/todoList/todoListHR";
 
 const DEFAULT_TODO_LIST = [
     { id: 1, name: 'task 1', description: 'description 1', checked: false },

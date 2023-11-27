@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { AuthForm } from '../../component/AuthForm'
+import { AuthForm } from '../../component/Auth/AuthForm'
 import styles from "../../component/modal.module.css";
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import styles from "./modal.module.css"
+import styles from "../../modal.module.css"
 
 export function NavigationForLK(){
     return(
