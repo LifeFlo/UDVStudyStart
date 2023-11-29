@@ -43,6 +43,13 @@ public class AccountRepository : IAccountRepository
         };
     }
 
+    public async Task Remove(Account account)
+    {
+        _db.Accounts.Remove(account);
+        await _db.SaveChangesAsync();
+    }
+
+
     public async Task Add(Account account)
     {
         await _db.Accounts.AddAsync(account);

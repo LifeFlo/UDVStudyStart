@@ -22,13 +22,11 @@ CREATE SCHEMA udv_start
     (
         id          UUID PRIMARY KEY not null,
         title       TEXT             not null,
-
         description TEXT             not null,
-        user_id     UUID             not null,
+        account_id     UUID             not null,
         is_complete BOOLEAN          not null,
         date        TIMESTAMP        not null,
-        constraint fk_user_id foreign key (user_id) references account (id)
-
+        constraint fk_user_id foreign key (account_id) references account (id) ON DELETE CASCADE
     )
 
     CREATE TABLE hr_employee
@@ -36,8 +34,8 @@ CREATE SCHEMA udv_start
         id          UUID primary key NOT NULL,
         hr_id       UUID NOT NULL,
         employee_id UUID NOT NULL,
-        constraint fk_hr_id foreign key (hr_id) references account(id),
-        constraint fk_employee_id foreign key (employee_id) references  account(id)
+        constraint fk_hr_id foreign key (hr_id) references account(id) on delete cascade ,
+        constraint fk_employee_id foreign key (employee_id) references  account(id) on delete cascade
     )
 
     CREATE TABLE IF NOT EXISTS token
@@ -54,4 +52,3 @@ CREATE SCHEMA udv_start
     title UUID             not null,
     text  UUID             not null
     );
-

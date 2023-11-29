@@ -10,7 +10,7 @@ public class Task
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("title")] [Required] public string Title { get; set; }
     [Column("description")] [Required] public string Desc { get; set; }
-    [Column("user_id")] [Required] public Guid UserId { get; set; }
+    [Column("user_id")] [ForeignKey("fk_user_id")][Required] public Guid UserId { get; set; }
     [Column("is_complete")] [Required] public bool IsComplete { get; set; }
     [Column("date")] [Required] public DateTime Date { get; set; }
 

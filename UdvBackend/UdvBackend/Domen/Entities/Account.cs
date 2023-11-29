@@ -29,10 +29,7 @@ public record Account : IEntity<Guid>
             Id = Guid.NewGuid(),
             RoleId = role.Id
         };
-
-    public bool IsMy(IUserLink entity)
-        => entity.UserId == Id;
-
+    
     public static Account From(RequestNewEmployee entity, Role role, string password)
         => new()
         {

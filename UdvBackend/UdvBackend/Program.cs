@@ -28,6 +28,7 @@ builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ITokenRepository, TokenRepository>(); 
+
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddSingleton<UdvStartDb>();

@@ -11,5 +11,7 @@ public interface IAccountRepository
 
     public Task<Result<Account, GetError>> Get(string userName);
 
+    public Task Remove(Account account);
+
     public Task Add(Account account);
 }

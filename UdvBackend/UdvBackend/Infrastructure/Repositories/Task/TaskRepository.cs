@@ -1,6 +1,7 @@
 using EduControl.DataBase;
 using EduControl.DataBase.ModelBd;
 using Microsoft.EntityFrameworkCore;
+using Vostok.Logging.Abstractions;
 using Task = UdvBackend.Domen.Entities.Task;
 
 namespace UdvBackend.Infrastructure.Repositories.Note;
@@ -8,15 +9,16 @@ namespace UdvBackend.Infrastructure.Repositories.Note;
 public class TaskRepository : ITaskRepository
 {
     private readonly UdvStartDb _db;
-
-    public TaskRepository(UdvStartDb db)
+    private readonly ILog _log;
+    public TaskRepository(UdvStartDb db, ILog log)
     {
         _db = db;
+        _log = log;
     }
     
-    public Task<Task?> Get(Guid id)
+    public async Task<Task?> Get(Guid id)
     {
-        throw new NotImplementedException();
+        return await _db.Tasks.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<List<Task>> Get(Account account)
@@ -31,8 +33,19 @@ public class TaskRepository : ITaskRepository
         await _db.SaveChangesAsync();
     }
 
-    public Task<Task> ChangeComplete(Task task, bool isComplete)
+  
+
+    public async Task<Task> ChangeComplete(Task task) // сделать с возвращением result
     {
-        throw new NotImplementedException();
+        var taskBd = await _db.Tasks.FindAsync(task.Id);
+        if (taskBd == null)
+        {
+            _log.Warn($"задачи с id: {task.Id} не существует");
+            return null ;
+        }
+        
+        taskBd.IsComplete = !task.IsComplete;
+        await _db.SaveChangesAsync();
+        return taskBd;
     }
 }

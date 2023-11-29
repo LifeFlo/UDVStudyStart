@@ -19,4 +19,10 @@ public class UdvStartDb : DbContext
     {
         optionsBuilder.UseNpgsql("Host=127.0.0.1;Port=5432;Database=UdvStart;Username=dev;Password=123123");
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Account>().HasMany<Task>().WithOne().HasConstraintName("fk_user_id").HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+
+    }
 }
