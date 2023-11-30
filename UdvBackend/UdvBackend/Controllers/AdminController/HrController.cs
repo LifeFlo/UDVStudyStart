@@ -55,7 +55,7 @@ public class HrController : ControllerBase
     }
     
     [HttpPost("Create/employee")]
-    public async Task<ApiResult<ResponseAccountEmployee>> Post([FromBody] RequestNewEmployee newAccount)
+    public async Task<ApiResult<ResponseAccountEmployeeAfterCreated>> Post([FromBody] RequestNewEmployee newAccount)
     {
         var role = await _roles.Get(Roles.Employee);
         if (role == null)
@@ -70,7 +70,7 @@ public class HrController : ControllerBase
         var hrEmployees = HREmployees.From(_accountScope.Account, account);
         await _linkEmployeesHr.Connect(hrEmployees);
         
-        return new ApiResult<ResponseAccountEmployee>(new ResponseAccountEmployee()
+        return new ApiResult<ResponseAccountEmployeeAfterCreated>(new ResponseAccountEmployeeAfterCreated()
         {
             Email = account.Email,
             Password = password

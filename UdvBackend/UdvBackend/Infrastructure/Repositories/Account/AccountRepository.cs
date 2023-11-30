@@ -33,9 +33,9 @@ public class AccountRepository : IAccountRepository
         }
     }
 
-    public async Task<Result<Account, GetError>> Get(string userName)
+    public async Task<Result<Account, GetError>> Get(string email)
     {
-        var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Name == userName);
+        var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Email == email);
         return account switch
         {
             null => new Result<Account, GetError>(GetError.NotFound, "account not found"),

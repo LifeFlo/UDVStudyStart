@@ -26,6 +26,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
+builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе такие махинаций
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ITokenRepository, TokenRepository>(); 
 
@@ -44,6 +45,11 @@ app.UseCors(_ =>
 
 
 
+app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/account"), c =>
+{
+    c.UseMiddleware<MiddleWareCheckToken>();
+});
+
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
     c.UseMiddleware<MiddleWareCheckToken>();
@@ -61,7 +67,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
 app.UseHttpsRedirection();
 app.UseAuthorization();
 

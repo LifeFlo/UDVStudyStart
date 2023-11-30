@@ -16,6 +16,8 @@ services:
   backend:
     depends_on: 
       - postgres
+    environment: 
+      - PostgresHost=Postgres
     build:
       context: ../../
       dockerfile: Dockerfile

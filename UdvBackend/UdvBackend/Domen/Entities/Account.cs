@@ -14,7 +14,7 @@ public record Account : IEntity<Guid>
 {
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("name")] public string Name { get; set; }
-    [Column("surname")] public string? Surname { get; set; }
+    [Column("surname")] public string? Surname { get; set; } //todo: заменить на lastName
     [Column("middle_name")] public string? MiddleName { get; set; }
     [Column("email")] public string Email { get; set; }
     [Column("password_hash")] public string PasswordHash { get; set; }
@@ -26,6 +26,8 @@ public record Account : IEntity<Guid>
             Email = entity.Email,
             PasswordHash = Hasher.HashPassword(entity.Name, entity.Email, entity.Password),
             Name = entity.Name,
+            MiddleName = entity.MiddleName,
+            Surname = entity.LastName,
             Id = Guid.NewGuid(),
             RoleId = role.Id
         };
