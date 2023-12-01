@@ -38,7 +38,7 @@ public class TaskController : ControllerBase
             return new ApiResult<Task>("у тебя нету новичков", string.Empty, 200);
         }
 
-        var employee = myEmployees.FirstOrDefault(x => x.Id == requestTask.userId);
+        var employee = myEmployees.FirstOrDefault(x => x.Id == requestTask.AccountId);
 
         if (employee == null)
         {

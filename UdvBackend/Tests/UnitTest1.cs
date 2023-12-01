@@ -36,7 +36,7 @@ public class TestsHrCicle
             Date = DateTime.UtcNow,
             Desc = "пойди домой отдохни",
             Title = "у тебя вид как у кринжового чела",
-            userId = id
+            AccountId = id
         };
 
         var accounts = new List<Account>().AddKiril().AddWithCustomId(id);

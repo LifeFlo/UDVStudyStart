@@ -11,6 +11,6 @@ public static class ExtensionTask
         task.Desc.Should().Be(request.Desc);
         task.Title.Should().Be(request.Title);
         task.IsComplete.Should().Be(false);
-        task.UserId.Should().Be(request.userId);
+        task.UserId.Should().Be(request.AccountId);
     }
 }
