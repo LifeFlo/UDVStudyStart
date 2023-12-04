@@ -98,7 +98,7 @@ public class TaskController : ControllerBase
             return new ApiResult<Task>("такой задачи нету", string.Empty, 404);
         }
 
-        if (task.UserId != _accountScope.Account.Id)
+        if (task.AccountId != _accountScope.Account.Id)
         {
             return new ApiResult<Task>("эта задача другого рабочего", string.Empty, 403);
         }

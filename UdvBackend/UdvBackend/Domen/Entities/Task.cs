@@ -10,7 +10,7 @@ public class Task
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("title")] [Required] public string Title { get; set; }
     [Column("description")] [Required] public string Desc { get; set; }
-    [Column("account_id")] [ForeignKey("fk_account_id")][Required] public Guid UserId { get; set; }
+    [Column("account_id")] [ForeignKey("fk_account_id")][Required] public Guid AccountId { get; set; }
     [Column("is_complete")] [Required] public bool IsComplete { get; set; }
     [Column("date")] [Required] public DateTime Date { get; set; }
 
@@ -24,7 +24,7 @@ public class Task
             Title = requestTask.Title,
             Id = Guid.NewGuid(),
             IsComplete = false,
-            UserId = requestTask.AccountId
+            AccountId = requestTask.AccountId
         };
     }
 }

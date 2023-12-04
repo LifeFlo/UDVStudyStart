@@ -2,6 +2,7 @@ using System.Threading.RateLimiting;
 using EduControl.DataBase;
 using EduControl.MiddleWare;
 using EduControl.Repositories;
+using UdvBackend.Infrastructure.AccountService;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Infrastructure.Repositories.Note;
@@ -28,8 +29,8 @@ builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
 builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе такие махинаций
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
-builder.Services.AddSingleton<ITokenRepository, TokenRepository>(); 
-
+builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
+builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddSingleton<UdvStartDb>();

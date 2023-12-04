@@ -23,7 +23,7 @@ public class TaskRepository : ITaskRepository
 
     public async Task<List<Task>> Get(Account account)
     {
-        var tasks = await _db.Tasks.Where(x => x.UserId == account.Id).ToListAsync();
+        var tasks = await _db.Tasks.Where(x => x.AccountId == account.Id).ToListAsync();
         return tasks;
     }
 

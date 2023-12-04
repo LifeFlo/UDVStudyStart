@@ -32,6 +32,7 @@ public record Account : IEntity<Guid>
             RoleId = role.Id
         };
     
+    //todo: cделай, чтоб был один
     public static Account From(RequestNewEmployee entity, Role role, string password)
         => new()
         {
