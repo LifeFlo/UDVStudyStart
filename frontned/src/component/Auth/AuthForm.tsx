@@ -4,7 +4,8 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useForm, Controller, SubmitHandler, useFormState} from "react-hook-form";
-import styles from "../modal.module.css"
+
+import styles from "../Auth/auth.module.css"
 
 interface ISignInForm{
     login: string;
@@ -40,11 +41,11 @@ export const AuthForm = () => {
                         <Typography variant="h4" >
                             Создать аккаунт
                         </Typography>
-                        <Typography variant="subtitle1" className={styles.authFormSub}>
+                        <Typography variant="subtitle1" >
                             Введите свои данные
                         </Typography>
 
-                        <form className={styles.authFormForm} onSubmit={handleSubmit(onSubmit)}>
+                        <form  onSubmit={handleSubmit(onSubmit)}>
                             <Controller
                                 control={ control }
                                 name="login"
@@ -122,85 +123,86 @@ export const AuthForm = () => {
                     </div>
                     :
                     <div className={styles.authForm}>
-                        <Typography variant="h4" >
-                            Войдите
-                        </Typography>
-                        <Typography variant="subtitle1" className={styles.authFormSub}>
-                            Войдите
-                        </Typography>
-
-                        <form className={styles.authFormForm} onSubmit={handleSubmit(onSubmit)}>
-                            <Controller
-                                control={ control }
-                                name="login"
-                                rules={{required: 'Заполни'}}
-                                render={ ({field}) =>
-                                    <TextField
-                                        label="Логин"
-                                        size="small"
-                                        margin="normal"
-                                        fullWidth={ true }
-                                        onChange={(e) => field.onChange(e)}
-                                        value={field.value}
-                                        error={ !!errors.login?.message }
-                                        helperText={ errors.login?.message }
-                                    />
-                                }
-                            />
-                            <Controller
-                                control={ control }
-                                name="password"
-                                rules={{required: 'Заполни'}}
-                                render={ ({field}) =>
-                                    <TextField
-                                        label="Пароль"
-                                        size="small"
-                                        margin="normal"
-                                        fullWidth={ true }
-                                        onChange={(e) => field.onChange(e)}
-                                        value={field.value}
-                                        error={ !!errors.password?.message }
-                                        helperText={ errors.password?.message }
-                                    />
-                                }
-                            />
-                        </form>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            fullWidth={ false }
-                            disableElevation={ true }
-                            sx ={{
-                                marginTop: 2
-                            }}
-                            onClick={onclick}
-                        >
-                            Войти
-                        </Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            fullWidth={ false }
-                            disableElevation={ true }
-                            sx ={{
-                                marginTop: 2
-                            }}
-                            onClick={() => setIsOpenLog(true)}
-                        >
-                            Регистрация
-                        </Button>
-                        <Button
-                            type="submit"
-                            variant="contained"
-                            fullWidth={ false }
-                            disableElevation={ true }
-                            sx ={{
-                                marginTop: 2
-                            }}
-                            onClick={onClickHR}
-                        >
-                            Войти для Эйчара
-                        </Button>
+                        <div className={styles.authFonGrad}>
+                            <Typography className={styles.titulEnter}>
+                                Войдите
+                            </Typography>
+                            <Typography >
+                                Войдите
+                            </Typography>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <Controller
+                                    control={ control }
+                                    name="login"
+                                    rules={{required: 'Заполни'}}
+                                    render={ ({field}) =>
+                                        <TextField
+                                            label="Логин"
+                                            size="small"
+                                            margin="normal"
+                                            fullWidth={ true }
+                                            onChange={(e) => field.onChange(e)}
+                                            value={field.value}
+                                            error={ !!errors.login?.message }
+                                            helperText={ errors.login?.message }
+                                        />
+                                    }
+                                />
+                                <Controller
+                                    control={ control }
+                                    name="password"
+                                    rules={{required: 'Заполни'}}
+                                    render={ ({field}) =>
+                                        <TextField
+                                            label="Пароль"
+                                            size="small"
+                                            margin="normal"
+                                            fullWidth={ true }
+                                            onChange={(e) => field.onChange(e)}
+                                            value={field.value}
+                                            error={ !!errors.password?.message }
+                                            helperText={ errors.password?.message }
+                                        />
+                                    }
+                                />
+                            </form>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                fullWidth={ false }
+                                disableElevation={ true }
+                                sx ={{
+                                    marginTop: 2
+                                }}
+                                onClick={onclick}
+                            >
+                                Войти
+                            </Button>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                fullWidth={ false }
+                                disableElevation={ true }
+                                sx ={{
+                                    marginTop: 2
+                                }}
+                                onClick={() => setIsOpenLog(true)}
+                            >
+                                Регистрация
+                            </Button>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                fullWidth={ false }
+                                disableElevation={ true }
+                                sx ={{
+                                    marginTop: 2
+                                }}
+                                onClick={onClickHR}
+                            >
+                                Войти для Эйчара
+                            </Button>
+                        </div>
                     </div>
             }
         </div>

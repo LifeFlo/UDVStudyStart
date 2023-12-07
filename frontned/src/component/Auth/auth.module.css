@@ -1,0 +1,35 @@
+.auth{
+    background-image: url("../../img/mainFon.png");
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+}
+
+.authForm{
+    width: 1100px;
+    height: 600px;
+    border-radius: 15px;
+    background-color: white;
+    margin-top: 48px;
+    margin-left: 180px;
+    align-items: center;
+    /*flex-direction: column;*/
+    /*justify-content: left;*/
+    /*!*align-items: center;*!*/
+    /*text-align: 190px;*/
+    background-image: url("../../img/fonAuth.png");
+    background-size: 362px;
+    background-repeat: no-repeat;
+    background-position-x: right;
+}
+
+.titulEnter{
+    color: #00D29D;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+

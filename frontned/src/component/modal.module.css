@@ -125,21 +125,8 @@
  background-size: cover;
 }
 
-.auth{
- background-color: #282c34;
-}
 
-.authForm{
- width: 1180px;
- height: 100vh;
- background-color: white;
- margin-left: 180px;
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- text-align: center;
-}
+
 
 .authFormSub{
  color: rgb(180, 184, 193);
