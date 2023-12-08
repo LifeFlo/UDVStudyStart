@@ -33,16 +33,10 @@ builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
-builder.Services.AddSingleton<UdvStartDb>();
+builder.Services.AddDbContext<UdvStartDb>();
 var app = builder.Build();
-
 await app.AddBaseRoles();
 
-app.UseCors(_ =>
-{
-    _.AllowAnyOrigin();
-    _.AllowAnyHeader();
-});
 
 
 
@@ -68,9 +62,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+
+app.UseCors(_ =>
+{
+    _.AllowAnyOrigin();
+    _.AllowAnyHeader();
+    _.AllowAnyMethod();
+});
+
 
 app.Run();
