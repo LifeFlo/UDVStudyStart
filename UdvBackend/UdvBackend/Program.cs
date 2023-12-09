@@ -34,6 +34,19 @@ builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddDbContext<UdvStartDb>();
+
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy  =>
+        {
+            policy.WithOrigins("http://example.com",
+                "http://www.contoso.com");
+        });
+});
+
 var app = builder.Build();
 await app.AddBaseRoles();
 
@@ -71,6 +84,7 @@ app.MapControllers();
 
 app.UseCors(_ =>
 {
+    _.WithOrigins("http://localhost:3000");
     _.AllowAnyOrigin();
     _.AllowAnyHeader();
     _.AllowAnyMethod();
