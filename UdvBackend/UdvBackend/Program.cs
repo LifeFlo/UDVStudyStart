@@ -2,6 +2,7 @@ using System.Threading.RateLimiting;
 using EduControl.DataBase;
 using EduControl.MiddleWare;
 using EduControl.Repositories;
+using Microsoft.AspNetCore.CookiePolicy;
 using UdvBackend.Infrastructure.AccountService;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
@@ -33,7 +34,7 @@ builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
-builder.Services.AddScoped<UdvStartDb>(); // todo: как временное решение 
+builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
 
 
 
@@ -66,6 +67,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCookiePolicy(new CookiePolicyOptions()
+{
+    Secure = CookieSecurePolicy.None
+});
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
