@@ -33,7 +33,7 @@ builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
-builder.Services.AddDbContext<UdvStartDb>();
+builder.Services.AddScoped<UdvStartDb>(); // todo: как временное решение 
 
 
 
