@@ -35,17 +35,7 @@ builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddDbContext<UdvStartDb>();
 
-var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-        policy  =>
-        {
-            policy.WithOrigins("http://example.com",
-                "http://www.contoso.com");
-        });
-});
 
 var app = builder.Build();
 await app.AddBaseRoles();
