@@ -67,16 +67,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCookiePolicy(new CookiePolicyOptions()
-{
-    Secure = CookieSecurePolicy.None
-});
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
 
-
+app.UseCookiePolicy(new CookiePolicyOptions()
+{
+    Secure = CookieSecurePolicy.None,
+    HttpOnly = HttpOnlyPolicy.Always,
+    MinimumSameSitePolicy = SameSiteMode.Strict,
+}); 
 app.UseCors(_ =>
 {
     _.WithOrigins("http://localhost:3000");
