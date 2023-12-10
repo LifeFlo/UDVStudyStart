@@ -28,7 +28,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
-builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе такие махинаций
+builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе два интерфейса на один класс.
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
@@ -36,29 +36,43 @@ builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.AllowAnyHeader();
+            policy.AllowAnyMethod();
+            policy.AllowAnyOrigin();
+        });
+});
 
 
 var app = builder.Build();
 await app.AddBaseRoles();
 
-
-
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/account"), c =>
 {
     c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseCors(MyAllowSpecificOrigins);
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsAdmin>();
+    c.UseCors(MyAllowSpecificOrigins);
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/employee"), c =>
 {
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsEmployee>();
+    c.UseCors(MyAllowSpecificOrigins);
 });
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -78,14 +92,8 @@ app.UseCookiePolicy(new CookiePolicyOptions()
     Secure = CookieSecurePolicy.None,
     HttpOnly = HttpOnlyPolicy.Always,
     MinimumSameSitePolicy = SameSiteMode.Strict,
-}); 
-app.UseCors(_ =>
-{
-    _.WithOrigins("http://localhost:3000");
-    _.AllowAnyOrigin();
-    _.AllowAnyHeader();
-    _.AllowAnyMethod();
 });
+
 
 
 app.Run();

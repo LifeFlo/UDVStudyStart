@@ -4,9 +4,7 @@ import './index.css';
 import {createBrowserRouter, Navigate, RouterProvider} from "react-router-dom";
 import Auth from "./Pages/Auth/Auth";
 import Game from "./Pages/Game/Game";
-import Profile from "./Pages/Profile/Profile";
 import Info from "./Pages/Info/Info";
-import {BrowserRouter} from "react-router-dom";
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -17,6 +15,7 @@ import Documents from "./Pages/Documents";
 import JobWithUniv from "./Pages/JobWithUniv";
 import ProfilHR from "./Pages/ProfilHR";
 import Sience from "./Pages/Sience";
+import {Profile} from "./Pages/Profile/Profile";
 
 
 
@@ -75,9 +74,7 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <React.StrictMode>
       <RouterProvider router={router} />
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

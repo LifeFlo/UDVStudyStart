@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from "react";
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import {useForm, Controller, SubmitHandler, useFormState} from "react-hook-form";
 import styles from "../modal.module.css"
+import axios from "axios";
+import {deflateRaw} from "zlib";
 
 interface ISignInForm{
     login: string;
@@ -19,6 +21,15 @@ export const AuthForm = () => {
     const onSubmit: SubmitHandler<ISignInForm> = (data) => console.log('data')
 
     const [isOpenLog, setIsOpenLog] = useState(false)
+
+
+    useEffect(()  => {
+        axios.post("http://37.139.43.80:80/api/auth", {email: "turnickii.n@gmail.com", password: "123123"});
+    } )
+
+    useEffect(() => {
+        axios.get("http://37.139.43.80:80/api/account")
+    }, []);
 
     const onclick = () => {
         window.location.assign('/profile');
