@@ -91,7 +91,8 @@ app.MapControllers();
 
 app.UseCookiePolicy(new CookiePolicyOptions()
 {
-    HttpOnly = HttpOnlyPolicy.Always
+    HttpOnly = HttpOnlyPolicy.Always,
+    MinimumSameSitePolicy = SameSiteMode.Lax
 });
 
 
