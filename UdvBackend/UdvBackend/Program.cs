@@ -47,6 +47,7 @@ builder.Services.AddCors(options =>
             policy.AllowAnyHeader();
             policy.AllowCredentials();
             policy.AllowAnyMethod();
+            policy.SetIsOriginAllowed(hostName => true);
         });
 });
 
@@ -92,7 +93,7 @@ app.UseCookiePolicy(new CookiePolicyOptions()
 {
     Secure = CookieSecurePolicy.None,
     MinimumSameSitePolicy = SameSiteMode.None,
-    HttpOnly = HttpOnlyPolicy.Always
+    HttpOnly = HttpOnlyPolicy.None
 });
 
 
