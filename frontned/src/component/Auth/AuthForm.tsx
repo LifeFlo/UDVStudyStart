@@ -24,12 +24,9 @@ export const AuthForm = () => {
 
 
     useEffect(()  => {
-        axios.post("http://37.139.43.80:80/api/auth", {email: "turnickii.n@gmail.com", password: "123123"});
+        axios.post("http://37.139.43.80:80/api/auth", {email: "turnickii.n@gmail.com", password: "123123"})
+            .then(() => axios.get("http://37.139.43.80:80/api/account", {withCredentials: true}));
     } )
-
-    useEffect(() => {
-        axios.get("http://37.139.43.80:80/api/account")
-    }, []);
 
     const onclick = () => {
         window.location.assign('/profile');
