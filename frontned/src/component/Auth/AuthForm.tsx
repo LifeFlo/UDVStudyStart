@@ -13,6 +13,7 @@ interface ISignInForm{
     password: string;
     mail: string;
 }
+axios.defaults.withCredentials = true;
 export const AuthForm = () => {
     const {handleSubmit, control} = useForm<ISignInForm>();
     const { errors } = useFormState({
@@ -24,9 +25,14 @@ export const AuthForm = () => {
 
 
     useEffect(()  => {
-        axios.post("http://37.139.43.80:80/api/auth", {email: "turnickii.n@gmail.com", password: "123123"})
-            .then(() => axios.get("http://37.139.43.80:80/api/account", {withCredentials: true}));
-    } )
+        axios.post("http://localhost:5148/api/auth", {email: "turnickii.n@gmail.com", password: "123123"},{withCredentials: true} )
+            .then((data) => {
+            console.log(data.headers["set-cookie"]);
+                console.log("reque");
+                console.log();
+                axios.get("http://localhost:5148/api/account", {withCredentials: true})
+            }).finally();
+    }, [])
 
     const onclick = () => {
         window.location.assign('/profile');

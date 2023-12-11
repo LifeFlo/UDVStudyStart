@@ -65,16 +65,16 @@ app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/account"), c =>
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
+    c.UseCors(MyAllowSpecificOrigins);
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsAdmin>();
-    c.UseCors(MyAllowSpecificOrigins);
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/employee"), c =>
 {
+    c.UseCors(MyAllowSpecificOrigins);
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsEmployee>();
-    c.UseCors(MyAllowSpecificOrigins);
 });
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -91,9 +91,7 @@ app.MapControllers();
 
 app.UseCookiePolicy(new CookiePolicyOptions()
 {
-    Secure = CookieSecurePolicy.None,
-    MinimumSameSitePolicy = SameSiteMode.None,
-    HttpOnly = HttpOnlyPolicy.None
+    HttpOnly = HttpOnlyPolicy.Always
 });
 
 
