@@ -3,6 +3,8 @@ using EduControl.DataBase;
 using EduControl.MiddleWare;
 using EduControl.Repositories;
 using UdvBackend.Infrastructure.Extnentions;
+using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
+using UdvBackend.Infrastructure.Repositories.Note;
 using UdvBackend.Repositories;
 using Vostok.Logging.Abstractions;
 using Vostok.Logging.Console;
@@ -23,6 +25,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
+builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
+builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ITokenRepository, TokenRepository>(); 
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
@@ -38,10 +42,17 @@ app.UseCors(_ =>
 });
 
 
-app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/admin"), c =>
+
+app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsAdmin>();
+});
+
+app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/employee"), c =>
+{
+    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseMiddleware<MiddleWareIsEmployee>();
 });
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

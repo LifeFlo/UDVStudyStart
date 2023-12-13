@@ -9,7 +9,7 @@ namespace EduControl.Controllers.Model;
 public class Token
 {
     [Column("value")] [Key] public string Value { get; set; }
-    [Column("user_id")] public Guid UsedId { get; set; }
+    [Column("account_id")] public Guid UsedId { get; set; }
     [Column("create_dt")] public DateTime CreateDt { get; set; }
 
     public static Token From(string token, Account account)

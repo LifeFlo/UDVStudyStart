@@ -1,3 +1,5 @@
+using UdvBackend.Controllers.AdminController.Model;
+
 namespace EduControl;
 
 public static class GenerateCode
@@ -6,4 +8,5 @@ public static class GenerateCode
     {
         return Guid.NewGuid().ToString("N");
     }
+    
 }

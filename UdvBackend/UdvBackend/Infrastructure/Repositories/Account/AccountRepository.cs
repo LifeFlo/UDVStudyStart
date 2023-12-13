@@ -3,6 +3,7 @@ using EduControl.Controllers.Model;
 using EduControl.DataBase;
 using EduControl.DataBase.ModelBd;
 using Microsoft.EntityFrameworkCore;
+using UdvBackend.Infrastructure.Result;
 
 namespace UdvBackend.Repositories;
 

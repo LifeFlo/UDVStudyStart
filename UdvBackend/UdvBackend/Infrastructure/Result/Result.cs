@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Components.Web;
-
-namespace EduControl;
+namespace UdvBackend.Infrastructure.Result;
 
 public class Result<T,TErr> 
 {
@@ -20,6 +18,6 @@ public class Result<T,TErr>
         Error = error;
         ErrorExplain = errorExplain;
     }
-
+    
     public bool HasError() => _hasError;
 }

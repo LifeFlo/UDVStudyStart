@@ -1,42 +1,71 @@
 using EduControl;
 using EduControl.Controllers.Model;
 using EduControl.DataBase.ModelBd;
+using EduControl.MiddleWare;
 using Microsoft.AspNetCore.Mvc;
+using PasswordGenerator;
+using UdvBackend.Controllers.AdminController.Model;
 using UdvBackend.DataBase.Entities.Account;
+using UdvBackend.Domen.Entities;
+using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Repositories;
 
 namespace UdvBackend.Controllers.AdminController;
 
 [ApiController]
-[Route("api/admin")]
+[Route("api/hr")]
 public class AdminController
 {
     private readonly IRoleRepository _roles;
     private readonly IAccountRepository _accounts;
-
-    public AdminController(IRoleRepository roles, IAccountRepository accounts)
+    private readonly ILinkEmployeesHr _linkEmployeesHr;
+    private readonly AccountScope _accountScope;
+    public AdminController(IRoleRepository roles, IAccountRepository accounts, ILinkEmployeesHr linkEmployeesHr, AccountScope accountScope)
     {
         _roles = roles;
         _accounts = accounts;
+        _linkEmployeesHr = linkEmployeesHr;
+        _accountScope = accountScope;
     }
-    
-    [HttpPost("create/admin")]
-    public async Task<ApiResult<string>> Post([FromBody] RequestNewAccount newAccount)
+
+    [HttpPost("create/hr")]
+    public async Task<ApiResult<string>> Post([FromBody] RequestNewHr newHr)
     {
-        var user = await _accounts.Get(newAccount.Name);
-        if (user.Value != null) return "username is busy";
-        var role = await _roles.Get(Roles.Admin);
+        var role = await _roles.Get(Roles.HR);
         if (role == null)
         {
-            await _roles.Add(Role.From(Roles.Admin));
-            role = await _roles.Get(Roles.Admin);
+            throw new Exception("роли не была создана при иницилазицаий базы данных");
         }
-                       
-        
-        var account = Account.From(newAccount, role);
+
+
+        var account = Account.From(newHr, role);
         await _accounts.Add(account);
+
         
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
     }
-    
+
+
+    [HttpPost("Create/employee")]
+    public async Task<ApiResult<ResponseAccountEmployee>> PostEmployee([FromBody] RequestNewEmployee newAccount)
+    {
+        var role = await _roles.Get(Roles.Employee);
+        if (role == null)
+        {
+            throw new Exception("роли не была создана при иницилазицаий базы данных");
+        }
+
+        var password = new Password().Next();
+        var account = Account.From(newAccount, role, password);
+        await _accounts.Add(account);
+
+        var hrEmployees = HREmployees.From(_accountScope.Account, account);
+        _linkEmployeesHr.Connect(hrEmployees);
+        
+        return new ApiResult<ResponseAccountEmployee>(new ResponseAccountEmployee()
+        {
+            Name = account.Name,
+            Password = password
+        });
+    }
 }
