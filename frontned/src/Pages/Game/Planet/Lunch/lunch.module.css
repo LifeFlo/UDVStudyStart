@@ -1,0 +1,63 @@
+.parent{
+    height: 100vh;
+    width: 100vw;
+}
+
+.bacLunch1{
+    background-image: url("../../../../img/lunchPlanet1.png");
+    width: 100%;
+    height: 100%;
+
+}
+
+.bacLunch2{
+    background-image: url("../../../../img/lunchPlanet2.png");
+    width: 100%;
+    height: 100%;
+
+}
+
+.bacLunch3{
+    background-image: url("../../../../img/lunchPlanet3.png");
+    height: 100%;
+    width: 100%;
+}
+
+.mascot{
+    background-image: url("../../../../img/mascotLunch.png");
+    width: 404px;
+    height: 430px;
+    position: absolute;
+    top: 277px;
+    left: 100px;
+}
+
+.dialog{
+    padding-left: 80px;
+    width: 875px;
+    height: 188px;
+    background-color: white;
+    box-shadow: 0 3px 5px 2px rgba(0, 0,0, .3);
+    border-radius: 7px;
+    position: absolute;
+    top: 505px;
+    left: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.text{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 500;
+    width: 740px;
+}
+
+.bntPos{
+    position: absolute;
+    top: 130px;
+    left: 880px;
+}

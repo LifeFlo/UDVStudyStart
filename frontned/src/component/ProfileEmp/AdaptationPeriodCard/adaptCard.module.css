@@ -1,0 +1,94 @@
+.card{
+    width: 761px;
+    height: 188px;
+    border-radius: 7px;
+    background: #FFF;
+    position: absolute;
+    top: 150px;
+    left: 410px;
+}
+
+.title{
+    position: absolute;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    top: 50px;
+    left: 410px;
+}
+
+.titleNast{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    position: absolute;
+    left: 16px;
+}
+
+.fioNast{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+    top: 35px;
+    left: 16px;
+}
+
+.infNast{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+    list-style-type: none;
+    top: 95px;
+    left: 135px;
+}
+
+.listEl{
+    margin-bottom: 10px;
+}
+
+.dateCard{
+    width: 350px;
+    height: 46px;
+    flex-shrink: 0;
+    border-radius: 7px 0 0 7px;
+    background: #00C996;
+    position: absolute;
+    top: 14px;
+    left: 411px;
+}
+
+.dateText{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 14px;
+}
+
+.gameText{
+    width: 321px;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 13px;
+    font-weight: 400;
+    position: absolute;
+    top: 65px;
+    left: 411px;
+}
+
+.mark{
+    color: #00C996;
+    font-weight: 500;
+}

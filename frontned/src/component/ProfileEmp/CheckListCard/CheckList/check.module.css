@@ -1,0 +1,28 @@
+.card{
+    width: 761px;
+    height: 276px;
+    border-radius: 7px;
+    background: #FFF;
+
+    position: absolute;
+    top: 420px;
+    left: 410px;
+}
+
+.title{
+    color: white;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute;
+    top: 340px;
+    left: 410px;
+}
+
+.scrollBar{
+    margin-left: 20px;
+    padding-left: 13px;
+    width: 720px;
+    height: 250px;
+    border: 0;
+}

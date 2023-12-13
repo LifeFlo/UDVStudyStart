@@ -1,0 +1,38 @@
+.background{
+    background-image: url("../../img/mainFon.png");
+    background-size: cover;
+    background-attachment: fixed
+}
+
+.mainTitle{
+    color: #F2F2F2;
+    font-family: Montserrat;
+    font-size: 60px;
+    font-weight: 600;
+    margin-top: 191px;
+    margin-left: 90px;
+}
+
+.cosmos{
+    position: absolute;
+    background-image: url("../../img/cosmos.png");
+    width: 711px;
+    height: 783px;
+    margin-left: 750px;
+}
+
+.title{
+    height: 150px;
+    background: linear-gradient(45deg, #7C0181 30%, #7247D3 90%);
+    margin-top: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.textTitle{
+    color: #F2F2F2;
+    font-family: Montserrat;
+    font-size: 48px;
+    font-weight: 600;
+}

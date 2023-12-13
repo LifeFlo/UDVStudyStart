@@ -15,10 +15,14 @@ import Bonus from "./Pages/Bonus";
 import Contacts from "./Pages/Contacts";
 import Documents from "./Pages/Documents";
 import JobWithUniv from "./Pages/JobWithUniv";
-import ProfilHR from "./Pages/ProfilHR";
+import ProfilHR from "./Pages/ProfileHr/ProfilHR";
 import Sience from "./Pages/Sience";
-
-
+import AdaptPeriodPlanet from "./Pages/Game/Planet/AdaptPeriod/AdaptPeriodPlanet";
+import BonusPlanet from "./Pages/Game/Planet/Bonus/BonusPlanet";
+import FirstDayPlanet from "./Pages/Game/Planet/FirstDay/FirstDayPlanet";
+import HolidayPlanet from "./Pages/Game/Planet/Holidays/HolidayPlanet";
+import LunchPlanet from "./Pages/Game/Planet/Lunch/LunchPlanet";
+import TransportPlanet from "./Pages/Game/Planet/Transport/TransportPlanet";
 
 
 const router = createBrowserRouter([
@@ -65,7 +69,31 @@ const router = createBrowserRouter([
     {
         path: "Sience",
         element: <Sience/>
-    }
+    },
+    {
+        path: "AdaptPeriodPlanet",
+        element: <AdaptPeriodPlanet/>
+    },
+    {
+        path: "BonusPlanet",
+        element: <BonusPlanet/>
+    },
+    {
+        path: "FirstDayPlanet",
+        element: <FirstDayPlanet/>
+    },
+    {
+        path: "HolidayPlanet",
+        element: <HolidayPlanet/>
+    },
+    {
+        path: "LunchPlanet",
+        element: <LunchPlanet/>
+    },
+    {
+        path: "TransportPlanet",
+        element: <TransportPlanet/>
+    },
 ])
 
 
@@ -75,9 +103,7 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-  <React.StrictMode>
       <RouterProvider router={router} />
-  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,0 +1,210 @@
+:root {
+ --color-importing-text: #00D29D;
+}
+
+.modal {
+ aspect-ratio: 20/9;
+ background-color: #ffffff;
+ position: relative;
+ top: 15%;
+ left: 25%;
+ height: 50%;
+ border-radius: 10px;
+}
+
+.modalNameCompanion {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+
+ background-color: white;
+ aspect-ratio: 24/9;
+ position: relative;
+ left: 25%;
+ top: 8%;
+ height: 6%;
+ border-radius: 10px;
+
+ .nameCompanion {
+  font-size: 150%;
+  color: var(--color-importing-text);
+ }
+
+}
+
+.parent {
+ width: 100%;
+ height: 100%;
+ position: absolute;
+ top: 0;
+ left: 0;
+ overflow: auto;
+}
+
+
+
+
+
+
+
+.authFormSub{
+ color: rgb(180, 184, 193);
+}
+
+.authFormForm{
+ width: 360px;
+}
+
+.avaPic{
+ background-image: url("../../../img/ава.png");
+ width: 143px;
+ height: 143px;
+ flex-shrink: 0;
+ position: absolute;
+ top: 50px;
+ left: 325px;
+}
+
+.name{
+ margin-top: 70px;
+ width: 250px;
+ margin-left: 25px;
+}
+
+.job{
+ margin: 0;
+ margin-left: 25px;
+}
+
+.infoNast{
+ position: absolute;
+ top: 125px;
+ left: 860px;
+}
+
+.scrollBar{
+ margin: 20px;
+ padding: 15px;
+ width: 150px;
+ height: 50px;
+ border: 1px solid #ccc;
+ overflow: auto;
+ damping: 0.2;
+}
+
+.noteHR{
+ width: 629px;
+ height: 318px;
+}
+
+.noteList{
+ width: 150px;
+ height: 50px;
+}
+
+.header_container {
+ text-align: left;
+}
+
+.header_title {
+ font-size: 25px;
+ font-weight: 400;
+}
+
+.app_container {
+ margin-top: 30px;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-content: center;
+}
+
+.container {
+ display: flex;
+ flex-direction: column;
+ width: 500px;
+}
+
+.todo_panel_container {
+ background-color: white;
+ box-shadow: 0px 8px 11px -8px rgba(34, 60, 80, 0.09);
+ margin-bottom: 15px;
+ width: 100%;
+ padding: 25px 20px;
+ border-radius: 5px;
+}
+
+.fields_container {
+ display: flex;
+ justify-content: space-between;
+ gap: 10px;
+}
+
+
+.field_container {
+ width: 100%;
+}
+
+.field_container label {
+ display: flex;
+ flex-direction: column;
+ gap: 5px;
+ font-size: 15px;
+}
+
+.field_container input {
+ font-size: 15px;
+ padding: 10px 5px;
+ border-radius: 2px;
+ border: 0.5px solid black;
+}
+
+.button_container {
+ width: 100%;
+ text-align: right;
+ margin-top: 10px;
+}
+
+.button {
+ border-radius: 5px;
+ padding: 8px 20px;
+ cursor: pointer;
+ background-color: white;
+}
+
+.button_red {
+ border: 1px solid rgba(210, 25, 25, 0.5);
+ color: #d21919;
+}
+
+.button_red:hover {
+ background-color: rgba(210, 25, 25, 0.05);
+}
+
+.button_orange {
+ border: 1px solid rgba(210, 102, 25, 0.5);
+ color: #d27c19;
+}
+
+.button_orange:hover {
+ background-color: rgba(210, 84, 25, 0.05);
+}
+
+.button_blue {
+ border: 1px solid rgba(25, 118, 210, 0.5);
+ color: #1976d2;
+}
+
+.button_blue:hover {
+ background-color: rgba(25, 118, 210, 0.05);
+}
+
+.overlay{
+ background: rgba(0,0,0, 0.45);
+ position: fixed;
+ top: 0;
+ left:0;
+ width: 100vw;
+ height: 100vh;
+ z-index: 10;
+}

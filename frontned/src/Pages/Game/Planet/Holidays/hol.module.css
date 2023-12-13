@@ -1,0 +1,56 @@
+.parent{
+    width: 100vw;
+    height: 100vh;
+}
+
+.bacHol1{
+    background-image: url("../../../../img/holPlanet1.png");
+    height: 100%;
+    width: 100%;
+}
+
+.bacHol2{
+    background-image: url("../../../../img/holPlanet2.png");
+    height: 100%;
+    width: 100%;
+}
+
+
+.mascot{
+    background-image: url("../../../../img/mascotHol.png");
+    width: 829px;
+    height: 739px;
+    position: absolute;
+    top: 277px;
+    left: 100px;
+}
+
+.dialog{
+    padding-left: 80px;
+    width: 875px;
+    height: 188px;
+    background-color: white;
+    box-shadow: 0 3px 5px 2px rgba(0, 0,0, .3);
+    border-radius: 7px;
+    position: absolute;
+    top: 505px;
+    left: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.text{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 500;
+    width: 740px;
+}
+
+.bntPos{
+    position: absolute;
+    top: 130px;
+    left: 880px;
+}

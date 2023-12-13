@@ -1,0 +1,52 @@
+.card{
+    width: 370px;
+    height: 205px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #FFF;
+    position: absolute;
+    top: 420px;
+    left: 805px;
+}
+
+.titleNot{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
+
+    position: absolute;
+    left: 20px;
+}
+
+.text{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 11px;
+    font-weight: 400;
+    width: 181px;
+
+    position: absolute;
+    top:48px;
+    left: 20px;
+}
+
+.notesList{
+    background-image: url("../../../img/notesList.png");
+    width: 185px;
+    height: 185px;
+
+    position: absolute;
+    top:432px;
+    left: 1038px;
+}
+
+.notesListTitle{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 500;
+
+    position: absolute;
+    left: 19px;
+}

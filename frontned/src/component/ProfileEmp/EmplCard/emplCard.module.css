@@ -1,0 +1,20 @@
+.card{
+    width: 261px;
+    height: 627px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #FFF;
+    margin: 50px 40px 100px 110px;
+    display: flex;
+    justify-content: center;
+}
+
+.btnExit{
+    background: white;
+    position: absolute;
+    top: 90%;
+    width: 45px;
+    height: 15px;
+    border: 0;
+    font-size: 11px;
+}

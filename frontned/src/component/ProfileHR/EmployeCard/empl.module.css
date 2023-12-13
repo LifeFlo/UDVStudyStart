@@ -1,0 +1,57 @@
+.card{
+    width: 776px;
+    height: 283px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #FFF;
+    margin-left: 410px;
+}
+
+.scrollBar{
+    background-color: white;
+    margin-top: 20px;
+    padding: 0 10px 10px;
+    width: 748px;
+    height: 230px;
+    overflow: auto;
+    border-radius: 7px;
+}
+
+.title{
+    color: white;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    position: absolute;
+    margin: 0;
+}
+
+.empl{
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 40px;
+}
+
+.search{
+    width: 200px;
+    height: 32px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 4px;
+    background: #FFF;
+    margin-left: 200px;
+}
+
+.searchPos{
+    margin-top: 50px;
+    margin-left: 600px;
+    margin-bottom: 20px;
+}
+
+.pos{
+    position: absolute;
+    top: 70px;
+    left: 410px;
+}
