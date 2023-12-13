@@ -1,6 +1,7 @@
 using EduControl;
 using EduControl.Controllers.Model;
 using EduControl.DataBase.ModelBd;
+using EduControl.MiddleWare;
 using Microsoft.AspNetCore.Mvc;
 using UdvBackend.DataBase.Entities.Account;
 using UdvBackend.Repositories;
@@ -8,33 +9,18 @@ using UdvBackend.Repositories;
 namespace UdvBackend.Controllers.Registered;
 
 [ApiController]
-[Route("api/create/user")]
+[Route("api/account")]
 public class AccountsController
 {
-    private readonly IAccountRepository _accounts;
-    private readonly IRoleRepository _roles;
-    public AccountsController(IAccountRepository accounts, IRoleRepository roles)
+    private readonly AccountScope _accountScope;
+    public AccountsController(AccountScope accountScope)
     {
-        _accounts = accounts;
-        _roles = roles;
+        _accountScope = accountScope;
     }
-
-    [HttpPost]
-    public async Task<ApiResult<string>> Post([FromBody] RequestNewHr newHr)
+    
+    [HttpGet]
+    public async Task<ApiResult<ResponseAccountInfo>> Get()
     {
-        var user = await _accounts.Get(newHr.Name);
-        if (user.Value != null) return "username is busy";
-        var role = await _roles.Get(Roles.Employee);
-        if (role == null)
-        {
-            await _roles.Add(Role.From(Roles.Employee));
-            role = await _roles.Get(Roles.Employee);
-        }
-                       
-        
-        var account = Account.From(newHr, role);
-        await _accounts.Add(account);
-        
-        return "Account created"; //todo: а что выглядит неплохо, аха)(()
+        return  (ResponseAccountInfo) _accountScope.Account;
     }
 }

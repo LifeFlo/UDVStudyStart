@@ -28,7 +28,7 @@ public class AuthController: ControllerBase
     [HttpPost]
     public async Task<ApiResult<string>> Post(RequestGetToken requestUser)
     {
-        var response = await _accounts.Get(requestUser.UserName);
+        var response = await _accounts.Get(requestUser.Email);
         if (response.HasError() || response.Value == null)
         {
             return new ApiResult<string>(response.Error.ToString(), response.ErrorExplain, 403);
@@ -45,6 +45,6 @@ public class AuthController: ControllerBase
         
         await _tokens.Add(token);
         HttpContext.Response.Cookies.Append("token", token.Value);
-        return "token recive";
+        return "Token Received";
     } 
 }

@@ -28,7 +28,7 @@ public class MiddleWareIsEmployee
         if (role == null) throw new Exception("Role not existed");
         
         
-        if (!role.IsHR())
+        if (!role.IsEmployee())
         {
             await context.Response.WriteAsJsonAsync(NotEmployee);
             return;

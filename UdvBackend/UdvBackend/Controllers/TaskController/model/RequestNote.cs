@@ -1,9 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace UdvBackend.Controllers.NoteController.model;
 
 public class RequestTask
 {
-    public Guid userId { get; set; }
-    public string Title { get; set; }
-    public string Desc { get; set; }
-    public DateTime Date { get; set; }
+    [Required] public Guid AccountId { get; set; }
+    [Required] public string Title { get; set; }
+    [Required] public string Desc { get; set; }
+    [Required] public DateTime Date { get; set; }
 }

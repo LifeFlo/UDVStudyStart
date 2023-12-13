@@ -8,7 +8,7 @@ export default function WorkExample() {
     const [click, setClick] = useState<Boolean>();
 
     useEffect(() => {
-            fetch("http://localhost:5148/api/auth", {
+            fetch("http://37.139.43.80:80/api/auth", {
                 method: "post",
                 headers: {
                     'Accept': 'application/json',

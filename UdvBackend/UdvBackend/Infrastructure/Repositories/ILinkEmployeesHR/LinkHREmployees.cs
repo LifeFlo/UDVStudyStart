@@ -7,7 +7,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 
-public class LinkHREmployees : ILinkEmployeesHr
+public class LinkHREmployees : ILinkEmployeesHr, ILInkHrEmpe
 {
     private readonly UdvStartDb _db;
     private readonly ILog _log;

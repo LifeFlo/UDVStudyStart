@@ -2,6 +2,8 @@ using System.Threading.RateLimiting;
 using EduControl.DataBase;
 using EduControl.MiddleWare;
 using EduControl.Repositories;
+using Microsoft.AspNetCore.CookiePolicy;
+using UdvBackend.Infrastructure.AccountService;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Infrastructure.Repositories.Note;
@@ -26,31 +28,51 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
+builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе два интерфейса на один класс.
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
-builder.Services.AddSingleton<ITokenRepository, TokenRepository>(); 
+builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
+builder.Services.AddSingleton<IAccountService, AccountService>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
-builder.Services.AddSingleton<UdvStartDb>();
-var app = builder.Build();
+builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
 
-await app.AddBaseRoles();
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
-app.UseCors(_ =>
+builder.Services.AddCors(options =>
 {
-    _.AllowAnyOrigin();
-    _.AllowAnyHeader();
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000");
+            policy.AllowAnyHeader();
+            policy.AllowCredentials();
+            policy.AllowAnyMethod();
+            policy.SetIsOriginAllowed(hostName => true);
+        });
 });
 
 
+var app = builder.Build();
+await app.AddBaseRoles();
+
+app.UseCors(MyAllowSpecificOrigins);
+
+app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/account"), c =>
+{
+    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseCors(MyAllowSpecificOrigins);
+});
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
+    c.UseCors(MyAllowSpecificOrigins);
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsAdmin>();
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/employee"), c =>
 {
+    c.UseCors(MyAllowSpecificOrigins);
     c.UseMiddleware<MiddleWareCheckToken>();
     c.UseMiddleware<MiddleWareIsEmployee>();
 });
@@ -61,9 +83,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCookiePolicy(new CookiePolicyOptions()
+{
+    HttpOnly = HttpOnlyPolicy.Always,
+    MinimumSameSitePolicy = SameSiteMode.Lax
+});
+
+
 
 app.Run();

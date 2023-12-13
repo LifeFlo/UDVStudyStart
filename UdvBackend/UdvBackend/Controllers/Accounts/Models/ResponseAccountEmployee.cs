@@ -1,7 +1,7 @@
 namespace EduControl.Controllers.Model;
 
-public class ResponseAccountEmployee
+public class ResponseAccountEmployeeAfterCreated
 {
     public string Password { get; set; }
-    public string Name { get; set; }
+    public string Email { get; set; }
 }
