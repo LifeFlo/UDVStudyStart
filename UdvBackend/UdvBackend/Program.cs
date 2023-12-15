@@ -3,6 +3,7 @@ using EduControl.DataBase;
 using EduControl.MiddleWare;
 using EduControl.Repositories;
 using Microsoft.AspNetCore.CookiePolicy;
+using Microsoft.OpenApi.Models;
 using UdvBackend.Infrastructure.AccountService;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
@@ -25,7 +26,34 @@ builder.Services.AddSingleton<ILog>(log);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "token",
+        In = ParameterLocation.Header,
+        Description =
+            "bearer токен",
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+});
+
 builder.Services.AddSingleton<IAccountRepository, AccountRepository>();
 builder.Services.AddSingleton<ILinkEmployeesHr, LinkHREmployees>();
 builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как тебе два интерфейса на один класс.
@@ -37,6 +65,7 @@ builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 builder.Services.AddCors(options =>
 {

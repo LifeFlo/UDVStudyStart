@@ -25,7 +25,7 @@ public class MiddleWareIsAdmin
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
         _log.Info("run middleWareIsAdmin"); // todo: весь код повторяется как в IsEmployee
-        if (!accountScope.Account.IsHR())
+        if (!accountScope.Account.IsHr())
         {
             await context.Response.WriteAsJsonAsync(NotAdmin);
             return;

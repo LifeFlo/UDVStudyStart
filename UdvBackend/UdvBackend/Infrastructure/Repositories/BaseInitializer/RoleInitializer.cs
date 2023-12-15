@@ -19,21 +19,9 @@ public class RoleInitializers //todo: можно рефакторнуть
 
     public async Task InitializeAsync(IRoleRepository roles, IAccountRepository accounts)
     {
-        if (await roles.Get(Roles.HR.NameRole) == null)
-        {
-            var role = Role.From(Roles.HR.NameRole);
-            Roles.CreateEmployeeRoleSingleton(role.Id);
-            await roles.Add(role);
-        }
+        await AddAndSetRole(Roles.HR.NameRole, roles, Roles.CreateHRRoleSingleton);
+        await AddAndSetRole(Roles.Employee.NameRole, roles, Roles.CreateEmployeeRoleSingleton);
         
-        
-        if (await roles.Get(Roles.Employee.NameRole) == null)
-        {
-            var role = Role.From(Roles.Employee.NameRole);
-            Roles.CreateHRRoleSingleton(role.Id);
-            await roles.Add(role);
-        }
-
         var newUser = new RequestNewHr()
         {
             Name = BaseAdminName,
@@ -54,5 +42,17 @@ public class RoleInitializers //todo: можно рефакторнуть
 
         var account = Account.From(newUser, adminRole.Id);
         await accounts.Add(account);
+    }
+
+    private async Task AddAndSetRole(string NameRole, IRoleRepository roles, Action<Guid> action)
+    {
+        var role = await roles.Get(NameRole);
+        if (role == null)
+        {
+            role = Role.From(Roles.HR.NameRole);
+            await roles.Add(role);
+        }
+
+        action(role.Id);
     }
 }

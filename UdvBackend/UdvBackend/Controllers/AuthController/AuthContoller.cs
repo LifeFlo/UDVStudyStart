@@ -45,8 +45,6 @@ public class AuthController : ControllerBase
 
         
         await _tokens.Add(token);
-
-        HttpContext.Response.Headers.Authorization = $"bearer {token.Value}";
         return $"{token.Value}";
     }
 }

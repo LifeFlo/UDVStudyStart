@@ -59,7 +59,7 @@ public class MIddleWareCheckTokenHeader
             return;
         }
 
-        var account = await _accounts.Get(accessToken.Value);
+        var account = await _accounts.Get(accessToken);
 
         if (account == null)
         {

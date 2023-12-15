@@ -7,7 +7,7 @@ namespace UdvBackend.Repositories;
 
 public interface IAccountRepository
 {
-    public Task<Result<Account, GetError>> Get(TokenInfo tokenInfo);
+    public Task<Account?> Get(TokenInfo tokenInfo);
 
     public Task<Account?> Get(string email);
 

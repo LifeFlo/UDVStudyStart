@@ -8,14 +8,14 @@ public class Roles
 
     public static void CreateEmployeeRoleSingleton(Guid id)
     {
-        if (Employee.Id == Guid.Empty) return;
+        if (Employee.Id != Guid.Empty) return;
         
         Employee = new EmployeeRole(id);
     }
     
     public static void CreateHRRoleSingleton(Guid id)
     {
-        if (HR.Id == Guid.Empty) return;
+        if (HR.Id != Guid.Empty) return;
         
         HR = new HRRole(id);   
     }

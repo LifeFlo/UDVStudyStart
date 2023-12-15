@@ -5,7 +5,7 @@ namespace UdvBackend.Infrastructure.Extnentions;
 
 public static class AccountExtensions
 {
-    public static bool IsHR(this Account account)
+    public static bool IsHr(this Account account)
         => account.RoleId == Roles.HR.Id;
 
     public static bool IsEmployee(this Account account)

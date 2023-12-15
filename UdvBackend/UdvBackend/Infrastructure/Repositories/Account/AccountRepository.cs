@@ -4,32 +4,32 @@ using EduControl.DataBase;
 using EduControl.DataBase.ModelBd;
 using Microsoft.EntityFrameworkCore;
 using UdvBackend.Infrastructure.Result;
+using Vostok.Logging.Abstractions;
 
 namespace UdvBackend.Repositories;
 
 public class AccountRepository : IAccountRepository
 {
     private readonly UdvStartDb _db;
-
-    public AccountRepository(UdvStartDb db)
+    private readonly ILog _log;
+    public AccountRepository(UdvStartDb db, ILog log)
     {
         _db = db;
+        _log = log;
     }
 
-    public async Task<Result<Account, GetError>> Get(TokenInfo tokenInfo)
+    public async Task<Account?> Get(TokenInfo tokenInfo)
     {
         try
         {
             var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Id == tokenInfo.UsedId);
-            return account switch
-            {
-                null => new Result<Account, GetError>(GetError.NotFound, "Account not found"),
-                _ => new Result<Account, GetError>(account)
-            };
+            
+            return account;
         }
         catch (Exception e)
         {
-            return new Result<Account, GetError>(GetError.Error, e.Message);
+            _log.Error($"Occured Error while work database: {e}");
+            return null;
         }
     }
 

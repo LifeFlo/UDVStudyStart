@@ -43,7 +43,7 @@ CREATE SCHEMA udv_start
         value      varchar(255) primary key not null,
         account_id uuid                     not null,
         create_dt  date                     not null,
-        ttl        timestamp                not null,
+        ttl        interval                 not null,
         constraint fk_user_id foreign key (account_id) references account (id)
     )
 
@@ -67,6 +67,3 @@ CREATE SCHEMA udv_start
 
         constraint fk_id_planet_info foreign key (id_planet_info) REFERENCES planet_info (id) on delete cascade
     );
-
-ALTER TABLE udv_start.token
-    ADD column ttl interval;
