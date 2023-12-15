@@ -59,21 +59,21 @@ app.UseCors(MyAllowSpecificOrigins);
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/account"), c =>
 {
-    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseMiddleware<MIddleWareCheckTokenHeader>();
     c.UseCors(MyAllowSpecificOrigins);
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/hr"), c =>
 {
     c.UseCors(MyAllowSpecificOrigins);
-    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseMiddleware<MIddleWareCheckTokenHeader>();
     c.UseMiddleware<MiddleWareIsAdmin>();
 });
 
 app.UseWhen(x => x.Request.Path.StartsWithSegments("/api/employee"), c =>
 {
     c.UseCors(MyAllowSpecificOrigins);
-    c.UseMiddleware<MiddleWareCheckToken>();
+    c.UseMiddleware<MIddleWareCheckTokenHeader>();
     c.UseMiddleware<MiddleWareIsEmployee>();
 });
 // Configure the HTTP request pipeline.

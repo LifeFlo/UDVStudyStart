@@ -7,6 +7,8 @@ namespace UdvBackend.Domen.Entities;
 public class PlanetInfo
 {
     [Column("id")] [Key] public Guid Id { get; set; }
+    [Column("name")] public string Name { get; set; }
+    [Column("parts")] public int Parts { get; set; } 
     [Column("title")] public Guid Title { get; set; }
     [Column("text")] public Guid Text { get; set; }
 }

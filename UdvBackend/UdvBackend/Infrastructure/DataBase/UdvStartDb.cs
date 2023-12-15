@@ -12,7 +12,7 @@ namespace EduControl.DataBase;
 public class UdvStartDb : DbContext
 {
     public DbSet<Account> Accounts { get; set; }
-    public DbSet<Token> Tokens { get; set; }
+    public DbSet<TokenInfo> Tokens { get; set; }
     public DbSet<Role> Roles { get; set; } 
     public DbSet<PlanetInfo> PlanetInfos { get; set; }
     public DbSet<Task> Tasks { get; set; }
@@ -26,7 +26,7 @@ public class UdvStartDb : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        Log.Info(AppSettings.GetHostDataBase());
+        Log.Info(AppSettings.GetHostDataBase()); //todo: я извиняюьс, но это явно нужно выкинуть за класс, и в DI
         optionsBuilder.UseNpgsql($"Host={AppSettings.GetHostDataBase()};Port=5432;Database=UdvStart;Username=dev;Password=123123");
     }
 

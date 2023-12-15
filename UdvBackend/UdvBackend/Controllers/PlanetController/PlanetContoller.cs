@@ -24,9 +24,10 @@ public class PlanetController : ControllerBase
     }
 
     [HttpGet("user/planets/info")]
-    public async Task<ApiResult<List<Guid>>> GetAll()
+    public async Task<ApiResult<List<PlanetInfo>>> GetAll()
     {
-        var ids = await _planetInfos.GetAllId();
+        var ids = await _planetInfos.GetAll();
+        
         return ids;
     }
 
@@ -56,6 +57,4 @@ public class PlanetController : ControllerBase
 
         return result.Value;
     }
-    
-    
 }

@@ -16,11 +16,11 @@ public class AccountRepository : IAccountRepository
         _db = db;
     }
 
-    public async Task<Result<Account, GetError>> Get(Token token)
+    public async Task<Result<Account, GetError>> Get(TokenInfo tokenInfo)
     {
         try
         {
-            var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Id == token.UsedId);
+            var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Id == tokenInfo.UsedId);
             return account switch
             {
                 null => new Result<Account, GetError>(GetError.NotFound, "Account not found"),
@@ -33,14 +33,11 @@ public class AccountRepository : IAccountRepository
         }
     }
 
-    public async Task<Result<Account, GetError>> Get(string email)
+    public async Task<Account?> Get(string email)
     {
         var account = await _db.Accounts.FirstOrDefaultAsync(x => x.Email == email);
-        return account switch
-        {
-            null => new Result<Account, GetError>(GetError.NotFound, "account not found"),
-            _ => new Result<Account, GetError>(account)
-        };
+        
+        return account;
     }
 
     public async Task Remove(Account account)

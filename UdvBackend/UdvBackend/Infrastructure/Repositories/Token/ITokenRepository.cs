@@ -6,7 +6,7 @@ namespace EduControl.Repositories;
 
 public interface ITokenRepository
 {
-    public  Task Add(Token token);
+    public  Task Add(TokenInfo tokenInfo);
 
-    public Task<Result<Token, GetError>> Get(string token);
+    public Task<TokenInfo?> Get(string token);
 }

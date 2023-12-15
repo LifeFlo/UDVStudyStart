@@ -24,11 +24,7 @@ public class MiddleWareIsEmployee
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
-        var role = await _roles.Get(accountScope.Account.RoleId);
-        if (role == null) throw new Exception("Role not existed");
-        
-        
-        if (!role.IsEmployee())
+        if (!accountScope.Account.IsEmployee())
         {
             await context.Response.WriteAsJsonAsync(NotEmployee);
             return;

@@ -27,11 +27,12 @@ public class HrController : ControllerBase
     private readonly AccountScope _accountScope;
     private readonly IAccountService _accountService;
     private readonly ILog _log;
-    public HrController(IRoleRepository roles, 
-        IAccountRepository accounts, 
-        ILinkEmployeesHr linkEmployeesHr, 
-        AccountScope accountScope, 
-        IAccountService accountService, 
+
+    public HrController(IRoleRepository roles,
+        IAccountRepository accounts,
+        ILinkEmployeesHr linkEmployeesHr,
+        AccountScope accountScope,
+        IAccountService accountService,
         ILog log)
     {
         _roles = roles;
@@ -45,15 +46,14 @@ public class HrController : ControllerBase
     [HttpPost("create/hr")]
     public async Task<ApiResult<string>> Post([FromBody] RequestNewHr newHr)
     {
-        var role = await _roles.Get(Roles.HR);
-        if (role == null)
+        if (Roles.HR.Id == null)
         {
             throw new Exception("роль не была создана при иницилазицаий базы данных");
         }
-        
-        var account = Account.From(newHr, role);
+
+        var account = Account.From(newHr, Roles.HR.Id);
         await _accounts.Add(account);
-        
+
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
     }
 
@@ -61,35 +61,34 @@ public class HrController : ControllerBase
     public async Task<ApiResult<List<EmployeeInfo>>> Get()
     {
         var myEmployees = await _linkEmployeesHr.GetEmployees(_accountScope.Account.Id);
-        
+
         _log.Info($"получены новички эйчара: {myEmployees}");
         if (myEmployees.Count == 0)
         {
             return new ApiResult<List<EmployeeInfo>>("у тебя нету новичков", string.Empty, 200);
         }
-        
-        
+
+
         var result = await _accountService.GetInfo(myEmployees);
-        
+
         return result;
     }
 
     [HttpPost("Create/employee")]
     public async Task<ApiResult<ResponseAccountEmployeeAfterCreated>> Post([FromBody] RequestNewEmployee newAccount)
     {
-        var role = await _roles.Get(Roles.Employee);
-        if (role == null)
+        if (Roles.Employee.Id == Guid.Empty)
         {
             throw new Exception("роли не была создана при иницилазицаий базы данных");
         }
 
         var password = new Password().Next();
-        var account = Account.From(newAccount, role, password);
+        var account = Account.From(newAccount, Roles.Employee.Id, password);
         await _accounts.Add(account);
 
         var hrEmployees = HREmployees.From(_accountScope.Account, account);
         await _linkEmployeesHr.Connect(hrEmployees);
-        
+
         return new ApiResult<ResponseAccountEmployeeAfterCreated>(new ResponseAccountEmployeeAfterCreated()
         {
             Email = account.Email,
@@ -101,7 +100,7 @@ public class HrController : ControllerBase
     public async Task<ApiResult<string>> Delete(Guid id)
     {
         var myEmployees = await _linkEmployeesHr.GetEmployees(_accountScope.Account.Id);
-        
+
         var employee = myEmployees.FirstOrDefault(x => x.Id == id);
 
         if (employee == null)

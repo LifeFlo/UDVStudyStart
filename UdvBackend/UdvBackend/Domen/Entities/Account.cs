@@ -20,7 +20,7 @@ public record Account : IEntity<Guid>
     [Column("password_hash")] public string PasswordHash { get; set; }
     [Column("role_id")] public Guid RoleId { get; set; }
 
-    public static Account From(RequestNewHr entity, Role role)
+    public static Account From(RequestNewHr entity, Guid roleId)
         => new()
         {
             Email = entity.Email,
@@ -29,18 +29,18 @@ public record Account : IEntity<Guid>
             MiddleName = entity.MiddleName,
             Surname = entity.LastName,
             Id = Guid.NewGuid(),
-            RoleId = role.Id
+            RoleId = roleId
         };
     
     //todo: cделай, чтоб был один
-    public static Account From(RequestNewEmployee entity, Role role, string password)
+    public static Account From(RequestNewEmployee entity, Guid role, string password)
         => new()
         {
             Email = entity.Email,
             PasswordHash = Hasher.HashPassword(entity.Name, entity.Email, password),
             Name = entity.Name,
             Id = Guid.NewGuid(),
-            RoleId = role.Id,
+            RoleId = role,
             MiddleName = entity.MiddleName,
             Surname = entity.Surname
         };

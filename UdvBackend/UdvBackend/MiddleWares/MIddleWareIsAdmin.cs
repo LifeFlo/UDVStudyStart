@@ -24,10 +24,8 @@ public class MiddleWareIsAdmin
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
-        _log.Info("run middleWareIsAdmin");
-        var role = await _roles.Get(accountScope.Account.RoleId);
-        if (role == null) throw new Exception("Role not existed"); // todo: весь код повторяется как в IsEmployee
-        if (!role.IsHR())
+        _log.Info("run middleWareIsAdmin"); // todo: весь код повторяется как в IsEmployee
+        if (!accountScope.Account.IsHR())
         {
             await context.Response.WriteAsJsonAsync(NotAdmin);
             return;

@@ -15,19 +15,16 @@ public class TokenRepository : ITokenRepository
         _db = db;
     }
 
-    public async Task Add(Token token)
+    public async Task Add(TokenInfo tokenInfo)
     {
-        await _db.Tokens.AddAsync(token);
+        await _db.Tokens.AddAsync(tokenInfo);
         await _db.SaveChangesAsync();
     }
 
-    public async Task<Result<Token, GetError>> Get(string token)
+    public async Task<TokenInfo?> Get(string token)
     {
         var tokenData = await _db.Tokens.FirstOrDefaultAsync(x => x.Value == token);
-        return tokenData switch
-        {
-            null => new Result<Token, GetError>(GetError.Error, "Invalid token"),
-            _ => new Result<Token, GetError>(tokenData)
-        };
+
+        return tokenData;
     }
 }

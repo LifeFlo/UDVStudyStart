@@ -12,11 +12,12 @@ namespace EduControl.Controllers;
 
 [ApiController]
 [Route("api/Auth")]
-public class AuthController: ControllerBase
+public class AuthController : ControllerBase
 {
     private readonly ILog _log;
     private readonly IAccountRepository _accounts;
     private readonly ITokenRepository _tokens;
+
 
     public AuthController(ILog log, IAccountRepository accounts, ITokenRepository tokens)
     {
@@ -28,23 +29,24 @@ public class AuthController: ControllerBase
     [HttpPost]
     public async Task<ApiResult<string>> Post(RequestGetToken requestUser)
     {
-        var response = await _accounts.Get(requestUser.Email);
-        if (response.HasError() || response.Value == null)
+        var account = await _accounts.Get(requestUser.Email.ToLower()); //todo: не самое приятное решение с ToLower
+        if (account == null)
         {
-            return new ApiResult<string>(response.Error.ToString(), response.ErrorExplain, 403);
+            return new ApiResult<string>("NotFountAccount", "Account with same Email Not Found", 403);
         }
-        
-        var account = response.Value;
-        if (Hasher.VerifyPassword(account ,requestUser.Password) == PasswordVerificationResult.Failed)
+
+        if (Hasher.VerifyPassword(account, requestUser.Password) == PasswordVerificationResult.Failed)
         {
             _log.Info($"user: {account.Name} write wrong password");
             return new ApiResult<string>("Wrong password", string.Empty, 403);
         }
-        
-        var token = Token.From(GenerateCode.GenerateToken(), account);
+
+        var token = TokenInfo.From(GenerateCode.GenerateToken(), account);
+
         
         await _tokens.Add(token);
-        HttpContext.Response.Cookies.Append("token", token.Value);
-        return "Token Received";
-    } 
+
+        HttpContext.Response.Headers.Authorization = $"bearer {token.Value}";
+        return $"{token.Value}";
+    }
 }

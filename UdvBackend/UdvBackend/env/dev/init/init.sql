@@ -43,12 +43,30 @@ CREATE SCHEMA udv_start
         value      varchar(255) primary key not null,
         account_id uuid                     not null,
         create_dt  date                     not null,
+        ttl        timestamp                not null,
         constraint fk_user_id foreign key (account_id) references account (id)
     )
 
-  CREATE TABLE planet_info
+
+    CREATE TABLE planet_info
     (
-    id    UUID PRIMARY KEY not null,
-    title UUID             not null,
-    text  UUID             not null
+        id    UUID PRIMARY KEY not null,
+        title UUID             not null,
+        text  UUID             not null,
+        name  varchar(30)      not null,
+        parts int              not null
+    )
+
+    CREATE TABLE Novel
+    (
+        id             uuid primary key not null,
+        part           int              not null,
+        Dialog         text             not null,
+        interlocutor   varchar(30)      not null,
+        id_planet_info uuid             not null,
+
+        constraint fk_id_planet_info foreign key (id_planet_info) REFERENCES planet_info (id) on delete cascade
     );
+
+ALTER TABLE udv_start.token
+    ADD column ttl interval;
