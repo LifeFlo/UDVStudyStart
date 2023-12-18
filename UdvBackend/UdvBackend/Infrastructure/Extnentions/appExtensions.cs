@@ -1,3 +1,4 @@
+using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Infrastructure.Repositories.PlanetHistory;
 using UdvBackend.Infrastructure.Repositories.PlanetInfo;
 using UdvBackend.Repositories;
@@ -15,7 +16,8 @@ public static class StartDataExtensions // всю эту фигню можно �
         {
             var roles = services.GetService<IRoleRepository>();
             var accounts = services.GetService<IAccountRepository>();
-            await BaseInitializer.Role.InitializeAsync(roles, accounts);
+            var linkEmployees = services.GetService<ILinkEmployeesHr>();
+            await BaseInitializer.Role.InitializeAsync(roles, accounts, linkEmployees);
         }
         catch (Exception e)
         {
