@@ -31,7 +31,7 @@ public class PlanetWithNovelInitializer
         {
             Id = guid,
             Name = nameOctopus,
-            Parts = parts,
+            Chapters = parts,
             Text = "оххх, как же много еды нужно есть, что хорошо себя чувствовать!!",
             Title = "Много есть полезно"
         };

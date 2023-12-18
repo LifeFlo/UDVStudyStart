@@ -8,7 +8,7 @@ public class PlanetInfo
 {
     [Column("id")] [Key] public Guid Id { get; set; }
     [Column("name")] public string Name { get; set; }
-    [Column("chapters")] public int Parts { get; set; } 
+    [Column("chapters")] public int Chapters { get; set; } 
     [Column("title")] public string Title { get; set; }
     [Column("text")] public string Text { get; set; }
 }
