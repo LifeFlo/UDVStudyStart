@@ -11,18 +11,18 @@ namespace UdvBackend.Controllers.Planets;
 [Route("api/account")]
 public class NovelController : ControllerBase
 {
-    private readonly IPlanetNovelRepository _planetNovelRepository;
+    private readonly INovelPlanetRepository _novelPlanetRepository;
     private readonly ILog _log;
-    public NovelController(IPlanetNovelRepository planetNovelRepository, ILog log)
+    public NovelController(INovelPlanetRepository novelPlanetRepository, ILog log)
     {
-        _planetNovelRepository = planetNovelRepository;
+        _novelPlanetRepository = novelPlanetRepository;
         _log = log;
     }
 
     [HttpGet("planet/{id:guid}/chapter/{chapter:int}")]
     public async Task<ApiResult<RequestChapterNovel>> Get(Guid id, int chapter)
     {
-        var novel = await _planetNovelRepository.Get(id, chapter);
+        var novel = await _novelPlanetRepository.Get(id, chapter);
         if (novel == null)
         {
             _log.Warn($"Историй с этой главной нету {chapter}");

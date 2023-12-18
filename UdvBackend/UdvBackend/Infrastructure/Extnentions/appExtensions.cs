@@ -32,8 +32,8 @@ public static class StartDataExtensions // всю эту фигню можно �
         try
         {
             var planets = services.GetService<IPlanetInfoRepository>();
-            var novels = services.GetService<IPlanetNovelRepository>();
-            BaseInitializer.Planet.InitializeAsync(planets, novels);
+            var novels = services.GetService<INovelPlanetRepository>();
+            await BaseInitializer.Planet.InitializeAsync(planets, novels);
         }
         catch (Exception e)
         {

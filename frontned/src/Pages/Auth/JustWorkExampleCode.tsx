@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {IResponse} from "../../Infrastructure/IResponse";
+import axios from "axios";
 
 export default function WorkExample() {
     const [ResponseAuth, setResponseAuth] = useState<IResponse<String>>();
@@ -8,20 +9,7 @@ export default function WorkExample() {
     const [click, setClick] = useState<Boolean>();
 
     useEffect(() => {
-            fetch("http://37.139.43.80:80/api/auth", {
-                method: "post",
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    UserName: UserName,
-                    password: UserPassword
-                })
-            })
-                .then((response) => {
-                    response.json();
-                });}
+           axios.post(sa,fs,{headers: "Authohization"})
         , [click])
 
 

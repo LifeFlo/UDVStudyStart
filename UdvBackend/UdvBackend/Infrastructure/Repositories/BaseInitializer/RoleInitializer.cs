@@ -44,12 +44,12 @@ public class RoleInitializers //todo: можно рефакторнуть
         await accounts.Add(account);
     }
 
-    private async Task AddAndSetRole(string NameRole, IRoleRepository roles, Action<Guid> action)
+    private async Task AddAndSetRole(string nameRole, IRoleRepository roles, Action<Guid> action)
     {
-        var role = await roles.Get(NameRole);
+        var role = await roles.Get(nameRole);
         if (role == null)
         {
-            role = Role.From(Roles.HR.NameRole);
+            role = Role.From(nameRole);
             await roles.Add(role);
         }
 

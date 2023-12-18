@@ -20,5 +20,5 @@ public class Novel
     public string Interlocutor { get; set; }
 
     [Column("id_planet_info", Order = 4)]
-    public string IdPlanetInfo { get; set; }
+    public Guid IdPlanetInfo { get; set; }
 }

@@ -17,6 +17,7 @@ public class UdvStartDb : DbContext
     public DbSet<PlanetInfo> PlanetInfos { get; set; }
     public DbSet<Task> Tasks { get; set; }
     public DbSet<HREmployees> LinkHrEmployees { get; set; }
+    public DbSet<Novel> Novels { get; set; }
     public readonly ILog Log;
 
     public UdvStartDb(ILog log)

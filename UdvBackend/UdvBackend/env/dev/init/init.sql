@@ -51,16 +51,16 @@ CREATE SCHEMA udv_start
     CREATE TABLE planet_info
     (
         id    UUID PRIMARY KEY not null,
-        title UUID             not null,
-        text  UUID             not null,
+        title text             not null,
+        text  text             not null,
         name  varchar(30)      not null,
-        parts int              not null
+        chapters int              not null
     )
 
     CREATE TABLE Novel
     (
         id             uuid primary key not null,
-        part           int              not null,
+        chapter           int              not null,
         Dialog         text             not null,
         interlocutor   varchar(30)      not null,
         id_planet_info uuid             not null,

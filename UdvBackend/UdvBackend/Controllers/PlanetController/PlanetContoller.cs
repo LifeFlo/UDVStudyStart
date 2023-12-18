@@ -24,27 +24,14 @@ public class PlanetController : ControllerBase
     }
 
     [HttpGet("user/planets/info")]
-    public async Task<ApiResult<List<PlanetInfo>>> GetAll()
+    public async Task<ApiResult<PlanetInfo[]>> GetAll()
     {
         var ids = await _planetInfos.GetAll();
         
+        
         return ids;
     }
-
-    [HttpGet("user/planets/info/{id:guid}")]
-    public async Task<ApiResult<PlanetInfo>> Get(Guid id)
-    {
-        var planetInfo = await _planetInfos.Get(id);
-        if (planetInfo == null)
-        {
-            _log.Warn($"info with guid:{id} not Found");
-            return new ApiResult<PlanetInfo>("planetInfo not found", string.Empty, 404);
-        }
-
-        return planetInfo;
-    }
-
-
+    
     [HttpPut("hr/planets/info/Change")]
     public async Task<ApiResult<PlanetInfo>> Update([FromBody] PlanetInfo updatePlanetInfo)
     {
@@ -54,7 +41,8 @@ public class PlanetController : ControllerBase
             HttpContext.Response.StatusCode = 304;
             return result.ToApiResult(304);
         }
-
+        
+        
         return result.Value;
     }
 }

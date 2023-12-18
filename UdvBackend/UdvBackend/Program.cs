@@ -8,6 +8,8 @@ using UdvBackend.Infrastructure.AccountService;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Infrastructure.Repositories.Note;
+using UdvBackend.Infrastructure.Repositories.PlanetHistory;
+using UdvBackend.Infrastructure.Repositories.PlanetInfo;
 using UdvBackend.Repositories;
 using Vostok.Logging.Abstractions;
 using Vostok.Logging.Console;
@@ -60,6 +62,8 @@ builder.Services.AddSingleton<ILInkHrEmpe, LinkHREmployees>(); // todo: как �
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ITokenRepository, TokenRepository>();
 builder.Services.AddSingleton<IAccountService, AccountService>();
+builder.Services.AddSingleton<IPlanetInfoRepository, PlanetInfoRepository>();
+builder.Services.AddSingleton<INovelPlanetRepository, NovelPlanetRepository>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
@@ -82,7 +86,9 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
 await app.AddBaseRoles();
+await app.AddBaseHistory();
 
 app.UseCors(MyAllowSpecificOrigins);
 
