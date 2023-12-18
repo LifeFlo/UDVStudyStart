@@ -1,5 +1,6 @@
 using EduControl.Controllers.Model;
 using EduControl.DataBase.ModelBd;
+using UdvBackend.Controllers.AdminController.Model;
 using UdvBackend.DataBase.Entities.Account;
 using UdvBackend.Infrastructure.Extnentions;
 using UdvBackend.Repositories;
@@ -21,7 +22,7 @@ public class RoleInitializers //todo: можно рефакторнуть
     {
         await AddAndSetRole(Roles.HR.NameRole, roles, Roles.CreateHRRoleSingleton);
         await AddAndSetRole(Roles.Employee.NameRole, roles, Roles.CreateEmployeeRoleSingleton);
-        
+
         var newUser = new RequestNewHr()
         {
             Name = BaseAdminName,
@@ -38,11 +39,31 @@ public class RoleInitializers //todo: можно рефакторнуть
         }
 
         var admin = await accounts.Get("turnickii.n@gmail.com");
-        if (admin.Exist()) return;
+        if (!admin.Exist())
+        {
+            var account = Account.From(newUser, adminRole.Id);
+            await accounts.Add(account);
+        }
 
-        var account = Account.From(newUser, adminRole.Id);
-        await accounts.Add(account);
+        var emplo = await accounts.Get("udv@mail.com");
+       
+        if (!emplo.Exist())
+        {
+            var empoloyees = CreateEmployee();
+            await accounts.Add(empoloyees);
+        }
     }
+
+    private static Account CreateEmployee()
+    {
+        var password = "123123";
+        var empoloyees = Account.From(new RequestNewEmployee()
+        {
+            Email = "udv@mail.com", MiddleName = "Журавлёв", Name = "Vadim", Surname = "heruco"
+        }, Roles.Employee.Id, password);
+        return empoloyees;
+    }
+    
 
     private async Task AddAndSetRole(string nameRole, IRoleRepository roles, Action<Guid> action)
     {
