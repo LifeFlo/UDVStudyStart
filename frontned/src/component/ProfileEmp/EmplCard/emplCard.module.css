@@ -11,7 +11,7 @@
 
 .fio{
     position: absolute;
-    top: 40%;
+    top: 38%;
     color: #000;
     font-family: Montserrat;
     font-size: 15px;
@@ -44,4 +44,11 @@
     height: 15px;
     border: 0;
     font-size: 11px;
+}
+
+.ava{
+    background-image: url("../../../img/ава.png");
+    width: 143px;
+    height: 143px;
+    margin-top: 10%;
 }
