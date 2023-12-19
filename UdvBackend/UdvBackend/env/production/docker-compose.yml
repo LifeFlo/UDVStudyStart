@@ -14,8 +14,7 @@ services:
     ports:
       - "5432:5432"
   backend:
-    depends_on: 
-      - postgres
+    restart: on-failure
     environment: 
       - PostgresHost=Postgres
     build:
