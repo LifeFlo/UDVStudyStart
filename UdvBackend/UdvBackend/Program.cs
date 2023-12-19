@@ -67,7 +67,6 @@ builder.Services.AddSingleton<INovelPlanetRepository, NovelPlanetRepository>();
 builder.Services.AddScoped<AccountScope>();
 builder.Services.AddSingleton<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<UdvStartDb>(); // todo: как временное решение 
-
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
 
@@ -89,6 +88,7 @@ var app = builder.Build();
 
 await app.AddBaseRoles();
 await app.AddBaseHistory();
+
 
 app.UseCors(MyAllowSpecificOrigins);
 

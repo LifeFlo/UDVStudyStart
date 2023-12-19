@@ -25,6 +25,7 @@ public class UdvStartDb : DbContext
         Log = log;
     }
 
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Log.Info(AppSettings.GetHostDataBase()); //todo: я извиняюьс, но это явно нужно выкинуть за класс, и в DI

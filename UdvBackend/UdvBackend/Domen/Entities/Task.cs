@@ -19,7 +19,7 @@ public class Task
     {
         return new Task()
         {
-            Date = requestTask.Date,
+            Date = requestTask.Date.ToUniversalTime(),
             Desc = requestTask.Desc,
             Title = requestTask.Title,
             Id = Guid.NewGuid(),
