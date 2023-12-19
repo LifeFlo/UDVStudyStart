@@ -10,33 +10,33 @@ export function EmplCard(){
     const [mail, setMail] = useState()
 
     const token = localStorage.getItem('token')
-    axios.get(
-        'http://37.139.43.80:80/api/account',
-        {headers: {Authorization: `Bearer ${token}`}},
-    )
-        .then(r => setName(r.data.value.name))
-    axios.get(
-        'http://37.139.43.80:80/api/account',
-        {headers: {Authorization: `Bearer ${token}`}},
-    )
-        .then(r => setSurname(r.data.value.surname))
-    axios.get(
-        'http://37.139.43.80:80/api/account',
-        {headers: {Authorization: `Bearer ${token}`}},
-    )
-        .then(r => setMidl(r.data.value.middleName))
-    axios.get(
-        'http://37.139.43.80:80/api/account',
-        {headers: {Authorization: `Bearer ${token}`}},
-    )
-        .then(r => setMail(r.data.value.email))
-
+    const [check, setCheck] = useState(false)
+    if (!check){
+        axios.get(
+            'http://37.139.43.80:80/api/account',
+            {headers: {Authorization: `Bearer ${token}`}},
+        )
+            .then(r => setName(r.data.value.name))
+        axios.get(
+            'http://37.139.43.80:80/api/account',
+            {headers: {Authorization: `Bearer ${token}`}},
+        )
+            .then(r => setSurname(r.data.value.surname))
+        axios.get(
+            'http://37.139.43.80:80/api/account',
+            {headers: {Authorization: `Bearer ${token}`}},
+        )
+            .then(r => setMidl(r.data.value.middleName))
+        axios.get(
+            'http://37.139.43.80:80/api/account',
+            {headers: {Authorization: `Bearer ${token}`}},
+        )
+            .then(r => setMail(r.data.value.email))
+    }
     let nam = name
     let ser = surname
     let mid = midl
     let mal = mail
-
-
     const onClickExit = () => {
         window.location.assign('/auth');
         window.localStorage.removeItem('token')

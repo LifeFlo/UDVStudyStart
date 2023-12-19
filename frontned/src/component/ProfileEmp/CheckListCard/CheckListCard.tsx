@@ -30,10 +30,16 @@ const StyledButton = styled(Button)`
 export function CheckListCard ( { onChange} ) {
     const token = localStorage.getItem('token')
     const [data, setData] = useState(Task)
-    axios.get(
-        'http://37.139.43.80:80/api/employee/tasks',
-        {headers: {Authorization: `Bearer ${token}`}}
-    ).then(x => setData(x.data))
+    const [check, setCheck] = useState(false)
+
+    if (!check){
+        axios.get(
+            'http://37.139.43.80:80/api/employee/tasks',
+            {headers: {Authorization: `Bearer ${token}`}}
+        ).then(x => setData(x.data))
+        setCheck(true)
+    }
+
     return(
         <div>
             <div className={styles.progressCard}>

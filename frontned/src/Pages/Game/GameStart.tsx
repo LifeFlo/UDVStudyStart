@@ -5,10 +5,30 @@ import React from "react";
 import {useState} from "react";
 import Modal from "../../component/Game/ModalSpace/ModalWithCompanion";
 import IconButton from "@mui/material/IconButton";
-import {ThemeProvider} from "@mui/material";
+import {styled, ThemeProvider} from "@mui/material";
 import FastForwardOutlinedIcon from "@mui/icons-material/FastForwardOutlined";
 import {createTheme} from "@mui/material/styles";
 import {teal} from "@mui/material/colors";
+import Button from "@mui/material/Button";
+
+const StyledButton = styled(Button)`
+  background-color: #00D29D;
+  border-radius: 30px;
+
+  font-size: 10px;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: white;
+  height: 27px;
+  width: 50px;
+
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  &:hover {
+    background-color: #00D29D;
+  }
+`;
 
 const theme = createTheme({
     palette: {
@@ -72,11 +92,11 @@ export default function GameStart() {
     return (
         <div className={styles.parent}>
             <div className={styles.background}>
-                <button
+                <StyledButton
                     onClick={exit}
                 >
                     Exit
-                </button>
+                </StyledButton>
                 <button
                     className={styles.btnModalHello}
                     onClick={handleModalOpen}
