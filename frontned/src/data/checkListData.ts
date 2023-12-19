@@ -1,20 +1,30 @@
 import {ITask} from "../models";
 
-export const task: ITask[] =[
-    {
-        title: "Документы",
-        discription: 'Сначала подпиши документы на трудоустройство.',
-    },
-    {
-        title: "Охрана труда",
-        discription: 'Изучи правила пожарной безопасности и охраны труда на рабочем месте.'
-    },
-    {
-        title: "Welcome pack",
-        discription: 'Порадуйся космическому Welcome pack UDV (сюрприз)'
-    },
-    {
-        title: "Welcome встреча",
-        discription: 'HR расскажет тебе все о компании, продуктах, процессах и командах.'
-    }
-]
+export const Task: ITask = {
+    value: [
+        {
+            id: "a4a99d85-224a-4529-9fcb-3360d819a6ab",
+            title: "Есть важно",
+            desc: "пж принеси  мне Круасан и Кофе из simple Coffe ",
+            accountId: "f1d02df0-0cb1-4092-b2c5-59401d55810f",
+            isComplete: false,
+            date: "2023-12-01T15:03:39.009Z"
+        },
+        {
+            id: "a4a99d85-224a-4529-9fcb-3360d819a6ab",
+            title: "Есть важно",
+            desc: "пж принеси  мне Круасан и Кофе из simple Coffe ",
+            accountId: "f1d02df0-0cb1-4092-b2c5-59401d55810f",
+            isComplete: false,
+            date: "2023-12-01T15:03:39.009Z"
+        },
+        {
+            id: "a4a99d85-224a-4529-9fcb-3360d819a6ab",
+            title: "Есть важно",
+            desc: "пж принеси  мне Круасан и Кофе из simple Coffe ",
+            accountId: "f1d02df0-0cb1-4092-b2c5-59401d55810f",
+            isComplete: false,
+            date: "2023-12-01T15:03:39.009Z"
+        }
+    ]
+}

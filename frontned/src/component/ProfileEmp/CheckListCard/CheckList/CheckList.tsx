@@ -1,11 +1,13 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import styles from "./check.module.css"
 import {Tasks} from "../todoLkEmp/Tasks";
-import {task} from "../../../../data/checkListData";
+import {ITask} from "../../../../models";
+import {Task} from "../../../../data/checkListData";
 import Button from '@mui/material/Button';
 import {styled} from "@mui/material";
 import {Scrollbar} from "smooth-scrollbar-react";
 import type {Scrollbar as BaseScrollbar} from "smooth-scrollbar/scrollbar";
+import axios from "axios";
 
 const StyledButton = styled(Button)`
   background-color: #00D29D;
@@ -28,6 +30,15 @@ const StyledButton = styled(Button)`
 `;
 // @ts-ignore
 export function CheckList ( { onChange} ) {
+    const token = localStorage.getItem('token')
+    const [data, setData] = useState(Task)
+    axios.get(
+        'http://37.139.43.80:80/api/employee/tasks',
+        {headers: {Authorization: `Bearer ${token}`}},
+    )
+        .then(r => setData(r.data))
+
+
     const scroller = useRef<BaseScrollbar | null>(null)
     return(
         <div>
@@ -35,10 +46,7 @@ export function CheckList ( { onChange} ) {
             <div className={styles.card}>
                 <Scrollbar ref = {scroller}>
                     <div className={styles.scrollBar}>
-                        <Tasks task={task[0]}/>
-                        <Tasks task={task[1]}/>
-                        <Tasks task={task[2]}/>
-                        <Tasks task={task[3]}/>
+                        <Tasks task={data}/>
                     </div>
                 </Scrollbar>
                 <StyledButton

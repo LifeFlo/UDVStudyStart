@@ -1,48 +1,102 @@
 import React, {useState} from "react";
-import styles from "../../Game/ModalSpace/modal.module.css"
+import styles from "../toDo.module.css"
 import Button from "@mui/material/Button";
+import axios from "axios";
+import AddIcon from "@mui/icons-material/Add";
+import {styled, ThemeProvider} from "@mui/material";
+import {createTheme} from "@mui/material/styles";
+import {teal} from "@mui/material/colors";
 
-const Defoult_todo ={
-    name: '',
-    discription: ''
-}
+const StyledButton = styled(Button)`
+  background-color: #00D29D;
+  position: absolute;
+  top:38%;
+  left: 66%;
+  
+
+  &:hover {
+    background-color: #84D9C3;
+  }
+`;
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: teal[50],
+        },
+        secondary: {
+            main: '#f44336',
+        },
+    },
+});
 
 interface TodoPanelProps {
-    addTodo: ({ name, description }: Omit<Todo, 'id' | 'checked'>) => void
-
+    id: string | undefined
 }
+export function TodoPanel ({id} : TodoPanelProps) {
+    const [valueName, setValueName] = useState('')
+    const [valueDisc, setValueDisc] = useState('')
+    const deadline = '2024-01-23T15:03:39.009Z'
+    const idEmpl = id
+    const token = localStorage.getItem('token')
 
+    const onClick = (id: string | undefined, titl: string, descr: string, data: string) => {
+        axios.post(
+            'http://37.139.43.80:80/api/hr/task/create',
+            {accountId: id, title: titl, desc: descr, date: data},
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+            .then(x => console.log(x.data))
+    }
 
-export const TodoPanel: React.FC<TodoPanelProps> = ({ addTodo }) => {
-    const [todo, setTodo] = useState(Defoult_todo)
-
-    const onChange =(event: React.ChangeEvent<HTMLInputElement>) => {
-        const{name, value} = event.target;
-        setTodo({ ...todo, [name]: value});
-    };
-
-    const onClick = () => {
-        addTodo({name: todo.name, description: todo.discription})
-        setTodo(Defoult_todo);
-    };
     return(
         <div className={styles.todo_panel_container}>
             <div className={styles.fields_container}>
                 <div className={styles.field_container}>
-                    <label htmlFor="name">
-                        <div>name</div>
-                        <input type="text" id ='name' value ={todo.name} name='name' onChange={onChange}/>
+                    <label htmlFor="Название">
+                        <div>Название</div>
+                        <input
+                            type="text"
+                            id ='Название'
+                            name='Название'
+                            onChange={(event) => setValueName(event.target.value)}
+                        />
                     </label>
                 </div>
                 <div className={styles.field_container}>
                     <label htmlFor="discription">
-                        <div>discription</div>
-                        <input type="text" id ='discription' value ={todo.discription} name='discription' onChange={onChange}/>
+                        <div>Описание</div>
+                        <input
+                            type="text"
+                            id ='discription'
+                            name='discription'
+                            onChange={(event) => setValueDisc(event.target.value)}
+                        />
+                    </label>
+                </div>
+
+            </div>
+            <div className={styles.fields_container}>
+                <div className={styles.date_container}>
+                    <label htmlFor="discription">
+                        <div>Дедлайн</div>
+                        <input
+                            type="text"
+                            id ='discription'
+                            name='discription'
+                            onChange={(event) => setValueDisc(event.target.value)}
+                        />
                     </label>
                 </div>
             </div>
             <div className={styles.button_container}>
-                <Button onClick={onClick}> ADD</Button>
+                <StyledButton
+                    onClick={() => onClick(idEmpl, valueName, valueDisc, deadline)}
+                >
+                    <ThemeProvider theme={theme}>
+                        <AddIcon color='primary' fontSize='large'/>
+                    </ThemeProvider>
+                </StyledButton>
             </div>
         </div>
     )

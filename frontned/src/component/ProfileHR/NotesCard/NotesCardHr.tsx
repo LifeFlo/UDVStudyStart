@@ -30,8 +30,7 @@ export function NotesCardHr( ){
             <div className={styles.card}>
                 <p className={styles.titleNot}>Заметки</p>
                 <span className={styles.text}>Что-то важное? Запиши, чтобы не забыть!</span>
-                <StyledButton
-                >
+                <StyledButton>
                     Перейти
                 </StyledButton>
             </div>

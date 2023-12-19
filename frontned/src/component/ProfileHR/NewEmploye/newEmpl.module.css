@@ -1,0 +1,49 @@
+.pos{
+    margin-top: 2.2%;
+    margin-left: 26.5%;
+}
+
+.card{
+    width: 400px;
+    height: 587px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    background: #FFF;
+}
+
+.title{
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.textField{
+    width: 300px;
+}
+
+.btn{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.fild{
+    margin-bottom: 20px;
+}
+
+.form{
+    padding-top: 20px;
+    padding-left: 50px;
+}
+
+.cosmonavt{
+    background-image: url("../../../img/cosmos.png");
+    width: 711px;
+    height: 695px;
+
+    position: absolute;
+    left: 53%;
+    top:0;
+}

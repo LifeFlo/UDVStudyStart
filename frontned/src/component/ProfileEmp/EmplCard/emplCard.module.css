@@ -1,12 +1,39 @@
 .card{
     width: 261px;
-    height: 627px;
+    height: 620px;
     flex-shrink: 0;
     border-radius: 7px;
     background: #FFF;
     margin: 50px 40px 100px 110px;
     display: flex;
     justify-content: center;
+}
+
+.fio{
+    position: absolute;
+    top: 40%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.contactTitle{
+    position: absolute;
+    top: 45%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contact{
+    position: absolute;
+    top: 48%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .btnExit{

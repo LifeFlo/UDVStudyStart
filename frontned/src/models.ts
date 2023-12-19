@@ -4,25 +4,28 @@ export interface IProduct{
 }
 
 export  interface ITask{
-    title: string,
-    discription: string,
+    value:
+        {
+            id: string,
+            title: string,
+            desc: string,
+            accountId: string,
+            isComplete: boolean,
+            date: string
+        }[]
+
 }
 
 export  interface IEmplHR{
-    fio: string
-    mail: string
-    doCheck: number
-}
-
-export interface IEmploye{
     value: {
+        id: string,
         name: string,
         surname: string,
         middleName: string,
-        email: string
-    },
-    error: null,
-    errorExplain: null
+        email: string,
+        completeStep: number,
+        totalStep: number
+    }[]
 }
 
 export interface IGame{

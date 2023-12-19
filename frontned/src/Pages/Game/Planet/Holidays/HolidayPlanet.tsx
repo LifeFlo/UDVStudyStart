@@ -20,16 +20,19 @@ const theme = createTheme({
 export default function LunchPlanet() {
     const [hol1, setHol1] = useState(false)
     const hol2 = () => {
-        window.location.assign('/game');
+        window.location.assign('/GameStart');
     }
     return(
         <div className={styles.parent}>
             {
                 hol1 ?
                     <div className={styles.bacHol2}>
+                        <div className={styles.mascot}></div>
+                        <div className={styles.dialogTitle}>
+                            <p className={styles.dialogTitleText}>Маскот</p>
+                        </div>
                         <div className={styles.dialog}>
-                            <div className={styles.mascot}></div>
-                            <p className={styles.text}>На первом этаже ты можешь найти Food story (лобби-бар). В котором ты можешь вкусно перекусить, попить чай или кофе.</p>
+                            <p className={styles.text}>К сожалению, иногда отдых бывает не таким радостным, а точнее я сейчас про больничный. Пора узнать как на него выйти.</p>
                             <div className={styles.bntPos}>
                                 <IconButton
                                     onClick={hol2}
@@ -44,8 +47,12 @@ export default function LunchPlanet() {
                     </div>
                     :
                     <div className={styles.bacHol1}>
+                        <div className={styles.mascot}></div>
+                        <div className={styles.dialogTitle}>
+                            <p className={styles.dialogTitleText}>Маскот</p>
+                        </div>
                         <div className={styles.dialog}>
-                            <p className={styles.text}>Ого! Посмотри какой тут красивый бургер, даже захотелось пообедать. Давай расскажу тебе о том, где ты сможешь это сделать.</p>
+                            <p className={styles.text}>Когда много работаешь, то обязательно необходимо прописывать себе отдых, чтобы восстановить силы и вернуться к работе воодушевлённым. Сейчас расскажу тебе, какие у нас правила.</p>
                             <div className={styles.bntPos}>
                                 <IconButton
                                     onClick={() => setHol1(true)}
@@ -56,7 +63,7 @@ export default function LunchPlanet() {
                                 </IconButton>
                             </div>
                         </div>
-                        <div className={styles.mascot}></div>
+
                     </div>
             }
         </div>

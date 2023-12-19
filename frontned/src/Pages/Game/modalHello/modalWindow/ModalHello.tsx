@@ -6,7 +6,7 @@ import { createTheme } from '@mui/material/styles';
 import { teal} from '@mui/material/colors';
 import {ThemeProvider} from "@mui/material";
 import Portal, { createContainer } from "../portal";
-import Styles from "./modalWindow.module.css";
+import Styles from "./modalHello.module.css";
 import AddIcon from "@mui/icons-material/Add";
 
 const theme = createTheme({
@@ -27,7 +27,7 @@ type Props = {
     children: React.ReactNode | React.ReactNode[];
 };
 
-const Modal = (props: Props) => {
+const ModalHello = (props: Props) => {
     const { title, onClose, children } = props;
 
     const rootRef = useRef<HTMLDivElement>(null);
@@ -81,7 +81,7 @@ const Modal = (props: Props) => {
                             onClick={handleClose}
                         >
                             <ThemeProvider theme={theme}>
-                               <FastForwardOutlinedIcon color="primary" fontSize="medium"/>
+                                <FastForwardOutlinedIcon color="primary" fontSize="medium"/>
                             </ThemeProvider>
                         </IconButton>
                     </div>
@@ -93,4 +93,4 @@ const Modal = (props: Props) => {
     ) : null;
 };
 
-export default Modal;
+export default ModalHello;

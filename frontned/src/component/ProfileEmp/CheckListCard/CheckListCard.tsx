@@ -25,7 +25,6 @@ const StyledButton = styled(Button)`
 
 // @ts-ignore
 export function CheckListCard ( { onChange} ) {
-    const [check, setCheck] = useState(false)
     return(
         <div>
             <div className={styles.progressCard}>
@@ -43,11 +42,11 @@ export function CheckListCard ( { onChange} ) {
                     width="157" height="157" viewBox="0 0 157 157" fill="none"
                     className={styles.progress}
                 >
-                    <circle cx="78.5" cy="78.5002" r="64.1389" stroke="#00D29D" stroke-width="20"/>
+                    <circle cx="78.5" cy="78.5002" r="64.1389" stroke="#00D29D" strokeWidth="20"/>
                     <circle
                         id="progerssBar"
                         className={styles.progressBar}
-                        cx="78.5" cy="78.5" r="63.5" stroke="#7E13AB" stroke-width="30"/>
+                        cx="78.5" cy="78.5" r="63.5" stroke="#7E13AB" strokeWidth="30"/>
                 </svg>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../../Game/ModalSpace/modal.module.css';
+import styles from '../toDo.module.css';
 
 interface HeaderProps {
     todoCount: number;
@@ -8,7 +8,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ todoCount }) => (
     <div className={styles.header_container}>
         <h1 className={styles.header_title}>
-            Todo list <b>{todoCount}</b> task(s)
+            Заданий в чек-листе: <b>{todoCount}</b>
         </h1>
     </div>
 );

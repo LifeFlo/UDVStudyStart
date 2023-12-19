@@ -4,11 +4,38 @@
     flex-shrink: 0;
     border-radius: 7px;
     background: #FFF;
-    margin-top: 50px;
+    margin-top: 40px;
     margin-left: 110px;
     display: flex;
     justify-content: center;
     position: absolute;
+}
+
+.fio{
+    position: absolute;
+    top: 34%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.contactTitle{
+    position: absolute;
+    top: 40%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.contact{
+    position: absolute;
+    top: 43%;
+    color: #000;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .btnExit{
@@ -19,4 +46,19 @@
     height: 15px;
     border: 0;
     font-size: 11px;
+}
+
+.ava{
+    background-image: url("../../../img/avaHR.png");
+    width: 166px;
+    height: 166px;
+    margin-top: 10%;
+}
+
+.test{
+    margin-left: 10px;
+}
+
+.test1{
+    margin-left: 5px;
 }

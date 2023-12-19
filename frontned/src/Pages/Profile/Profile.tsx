@@ -9,6 +9,7 @@ import {Route, Routes} from "react-router-dom";
 import React, {useState} from "react";
 import Info from "../Info/Info";
 import styles from "./prof.module.css";
+import axios from "axios";
 
 
 const src = "https://jsonplaceholder.typicode.com/posts"

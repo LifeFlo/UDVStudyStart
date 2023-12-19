@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useState} from "react";
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
@@ -12,32 +12,45 @@ interface ISignInForm{
     password: string;
     mail: string;
 }
-export const AuthForm = () => {
+// @ts-ignore
+export const AuthForm = ( ) => {
     const {handleSubmit, control} = useForm<ISignInForm>();
     const { errors } = useFormState({
         control
     })
-    const [check, checkValue] = useState()
-    const [state, setState] = useState({ redirect: false })
     const [password, passwordValue] = useState('')
     const [mail, mailValue] = useState('')
 
     const request = async (mail: string, password: string) => {
-        axios.post("http://37.139.43.80:80/api/auth",
+        axios.post('http://37.139.43.80:80/api/auth',
             {email: mail, password: password})
-            .then(x => console.log(x.data.value))
+            .then(x => checkToken(x.data.value))
         }
 
-    const checkToken = (check: string) =>{
-        if (check === null){
+    const checkToken = (check: string) => {
+        if (check === null) {
             console.log('not')
         }
-        else{
-            localStorage.setItem(check,check)
-            window.location.assign('/profile');
+        else {
+            console.log(check)
+            localStorage.setItem('token',check)
+            //
+            axios.get(
+                'http://37.139.43.80:80/api/account',
+                {headers: {Authorization: `Bearer ${check}`}},
+            )
+                .then(r => checkRole(r.data.value.role))
         }
     }
 
+    const checkRole = (role: string) => {
+        if (role === 'Employee'){
+            window.location.assign('/profile');
+        }
+        else {
+            window.location.assign('/ProfilHR');
+        }
+    }
 
     return(
         <div className={styles.auth}>
@@ -82,13 +95,6 @@ export const AuthForm = () => {
                             onClick={() => request(mail, password)}
                         >
                             Войти
-                        </button>
-                    </div>
-                    <div>
-                        <button
-                            className={styles.btnEnter}
-                        >
-                            Войти для Эйчара
                         </button>
                     </div>
                 </div>

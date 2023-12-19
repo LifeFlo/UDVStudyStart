@@ -19,10 +19,13 @@ const theme = createTheme({
 
 export default function TransportPlanet() {
     const transport = () => {
-        window.location.assign('/game');
+        window.location.assign('/GameStart');
     }
     return(
         <div className={styles.parent}>
+            <div className={styles.dialogTitle}>
+                <p className={styles.dialogTitleText}>Маскот</p>
+            </div>
             <div className={styles.bacTrans}>
                 <div className={styles.dialog}>
                     <p className={styles.text}>На этой планете слишком много пробок, но хочу тебя обрадовать, что в нашей компании таких проблем не будет. У нас отличная транспортная доступность, а также существует корпоративное такси.</p>

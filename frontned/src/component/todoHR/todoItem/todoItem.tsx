@@ -1,11 +1,23 @@
-import React from 'react';
+import React, {useRef} from 'react';
+import {Scrollbar} from "smooth-scrollbar-react";
+import styles from "../toDo.module.css";
+import {ITask} from "../../../models";
+import {Scrollbar as BaseScrollbar} from "smooth-scrollbar/scrollbar";
 
-interface TodoItemProps {
-    todo: Todo;
+interface TaskProps{
+    task: ITask
 }
 
-export const TodoItem: React.FC<TodoItemProps> = ({todo}) => {
-    return <div>
-        {todo.name}
-    </div>
+export function TodoItem  ( {task}: TaskProps ) {
+    const scroller = useRef<BaseScrollbar | null>(null)
+    return(
+        <div>
+            {task.value.map(todo => (
+                <div className={styles.cardTask}>
+                    <p className={styles.title}>{todo.title}</p>
+                    <p className={styles.text}>{todo.desc}</p>
+                </div>
+            ))}
+        </div>
+    )
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../Game/ModalSpace/modal.module.css"
+import styles from '../toDo.module.css'
 
 interface ButtonProps extends React.ComponentPropsWithRef<'button'> {
     color: 'orange' | 'blue' | 'red';

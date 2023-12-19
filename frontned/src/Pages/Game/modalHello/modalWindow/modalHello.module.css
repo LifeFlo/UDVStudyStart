@@ -48,9 +48,9 @@
 }
 
 .mascot{
-    background-image: url("../../../img/mascotBon.png");
-    width: 466px;
-    height: 382px;
+    background-image: url("../../../../img/mascotHello.png");
+    width: 430px;
+    height: 383px;
     position: absolute;
     top:320px;
     left: 120px;

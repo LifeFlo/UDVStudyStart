@@ -1,12 +1,36 @@
-import React, {useRef, useState} from 'react';
-import styles from './empl.module.css'
-import {ListEmplHr} from '../../../data/listEmplHr';
+import React, {useRef, useState} from "react";
+import styles from './choose.module.css'
 import {Scrollbar} from "smooth-scrollbar-react";
-import type {Scrollbar as BaseScrollbar} from "smooth-scrollbar/scrollbar";
-import {EmplHr} from "./EmplHr";
+import {ListEmplHr} from "../../../../data/listEmplHr";
+import {Scrollbar as BaseScrollbar} from "smooth-scrollbar/scrollbar";
+import Button from '@mui/material/Button';
+import {styled} from "@mui/material";
 import axios from "axios";
+import {Choose} from "./Choose";
 
-export function EmplHrCard() {
+const StyledButton = styled(Button)`
+  background-color: #00D29D;
+  border-radius: 30px;
+
+  font-size: 10px;
+  font-family: Montserrat;
+  font-weight: 400;
+  color: white;
+  height: 27px;
+  width: 115px;
+  box-shadow: 0 3px 5px 2px rgba(131, 201, 183, .3);
+  margin-top: 45px;
+
+  position: absolute;
+  top: 100%;
+
+  &:hover {
+    background-color: #00D29D;
+  }
+`;
+
+// @ts-ignore
+export function ChooseEmpl( {onChange, choose} ){
     const token = localStorage.getItem('token')
     const [data, setData] = useState(ListEmplHr)
     const [check, setCheck] = useState(false)
@@ -21,7 +45,13 @@ export function EmplHrCard() {
     }
 
     const scroller = useRef<BaseScrollbar | null>(null)
+    const [item, setItem ] = useState('')
     const [value, setValue] = useState('')
+    const chooseEmpl = (e: string) =>{
+        setItem(e)
+    }
+
+    choose(item)
 
     return(
         <div className={styles.pos}>
@@ -36,9 +66,14 @@ export function EmplHrCard() {
                     />
                 </form>
                 <div className={styles.scrollBar}>
-                    <EmplHr empls={data} value = {value}/>
+                    <Choose empls={data} value = {value} setItem={chooseEmpl}/>
                 </div>
             </Scrollbar>
+            <StyledButton
+                onClick={() => onChange(true)}
+            >
+                Дальше
+            </StyledButton>
         </div>
     )
 }

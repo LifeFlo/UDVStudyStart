@@ -21,7 +21,7 @@ export default function LunchPlanet() {
     const [lunch1, setLunch1] = useState(false)
     const [lunch2, setLunch2] = useState(false)
     const lunch3 = () => {
-        window.location.assign('/game');
+        window.location.assign('/GameStart');
     }
     return(
         <div className={styles.parent}>
@@ -31,6 +31,9 @@ export default function LunchPlanet() {
                         {
                             lunch2 ?
                                 <div className={styles.bacLunch3}>
+                                    <div className={styles.dialogTitle}>
+                                        <p className={styles.dialogTitleText}>Маскот</p>
+                                    </div>
                                     <div className={styles.dialog}>
                                         <p className={styles.text}>А если немного пройтись, то ты найдёшь уютное кафе “Пятница”.  Там можно попробовать бизнес-ланчи, кондитерские изделия и ароматный кофе.
                                             <br/>Приятного тебе аппетита!</p>
@@ -48,6 +51,9 @@ export default function LunchPlanet() {
                                 </div>
                                 :
                                 <div className={styles.bacLunch2}>
+                                    <div className={styles.dialogTitle}>
+                                        <p className={styles.dialogTitleText}>Маскот</p>
+                                    </div>
                                     <div className={styles.dialog}>
                                         <p className={styles.text}>На первом этаже ты можешь найти Food story (лобби-бар). В котором ты можешь вкусно перекусить, попить чай или кофе.</p>
                                         <div className={styles.bntPos}>
@@ -66,6 +72,9 @@ export default function LunchPlanet() {
                     </div>
                     :
                     <div className={styles.bacLunch1}>
+                        <div className={styles.dialogTitle}>
+                            <p className={styles.dialogTitleText}>Маскот</p>
+                        </div>
                         <div className={styles.dialog}>
                             <p className={styles.text}>Ого! Посмотри какой тут красивый бургер, даже захотелось пообедать. Давай расскажу тебе о том, где ты сможешь это сделать.</p>
                             <div className={styles.bntPos}>
