@@ -36,7 +36,7 @@ export function EmplHrCard() {
                     />
                 </form>
                 <div className={styles.scrollBar}>
-                    <EmplHr empls={data} value = {value}/>
+                    {/*<EmplHr empls={data} value = {value}/>*/}
                 </div>
             </Scrollbar>
         </div>

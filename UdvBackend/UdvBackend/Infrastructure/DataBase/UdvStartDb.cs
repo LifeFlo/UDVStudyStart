@@ -27,7 +27,7 @@ public class UdvStartDb : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         Log.Info(AppSettings.GetHostDataBase());
-        optionsBuilder.UseNpgsql($"Host={AppSettings.GetHostDataBase()};Port=5432;Database=verceldb;Username=default;Password=KBfN7eg4qUrW");
+        optionsBuilder.UseNpgsql($"Host={AppSettings.GetHostDataBase()};Port=5432;Database=UdvStart;Username=dev;Password=123123");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

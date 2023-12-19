@@ -9,12 +9,15 @@ interface EmplHrProps{
 }
 
 export function EmplHr({empls, value} : EmplHrProps){
+
     var listEmplHr = empls.value.map(item =>(
         item.name + ' ' + item.surname + ' ' + item.middleName
     ))
+
     const filter = listEmplHr.filter(fio => {
         return fio.toLowerCase().includes(value.toLowerCase())
     })
+
     return(
         <div>
             {
