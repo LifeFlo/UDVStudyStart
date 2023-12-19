@@ -3,16 +3,31 @@ import styles from './todo.module.css'
 import {ITask} from "../../../../models";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import {Checkbox} from "@mui/material";
+import axios from "axios";
 
 interface TaskProps{
     task: ITask
 }
 
 export function Tasks({task}: TaskProps){
-    const [checked, setChecked] = React.useState(false);
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setChecked(event.target.checked);
-    };
+    var t = false
+    const test = () => {
+        task.value.map((item) => (
+            t = item.isComplete
+        ))
+    }
+
+    const [checked, setChecked] = useState(true);
+
+    const handleChange = (e: string) => {
+        console.log(e)
+        const token = localStorage.getItem('token')
+        axios.patch(
+            'http://37.139.43.80:80/api/employee/task/'+ e +'/do',
+            {},
+            {headers: {Authorization: `Bearer ${token}`}}
+        )
+    }
 
     return(
         <div className={styles.main}>
@@ -22,13 +37,14 @@ export function Tasks({task}: TaskProps){
                         <FormControlLabel
                             control={
                                 <Checkbox
-                                    checked={checked}
-                                    onChange={handleChange}
+                                    checked={item.isComplete}
+                                    onChange={() => handleChange(item.id)}
                                     name="checked"
                                     style ={{
                                         color: "#00C996",
                                     }}
-                                />}
+                                />
+                        }
                             label={<p className={styles.title}>
                                 {item.title}
                             </p>}

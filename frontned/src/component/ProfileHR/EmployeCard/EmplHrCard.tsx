@@ -19,6 +19,7 @@ export function EmplHrCard() {
             .then(r => setData(r.data))
         setCheck(true)
     }
+    console.log(data)
 
     const scroller = useRef<BaseScrollbar | null>(null)
     const [value, setValue] = useState('')
@@ -36,7 +37,7 @@ export function EmplHrCard() {
                     />
                 </form>
                 <div className={styles.scrollBar}>
-                    {/*<EmplHr empls={data} value = {value}/>*/}
+                    <EmplHr empls={data} value = {value}/>
                 </div>
             </Scrollbar>
         </div>

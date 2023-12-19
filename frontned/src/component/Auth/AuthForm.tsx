@@ -43,6 +43,7 @@ export const AuthForm = ( ) => {
         }
     }
 
+
     const checkRole = (role: string) => {
         if (role === 'Employee'){
             window.location.assign('/profile');

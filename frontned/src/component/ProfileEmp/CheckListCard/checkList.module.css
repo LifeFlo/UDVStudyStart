@@ -46,3 +46,70 @@
     top: 445px;
     left: 575px;
 }
+
+.progressBar{
+    stroke-dasharray: 10 50;
+}
+
+.test{
+    background-color: transparent;
+    border-radius: 100px;
+    border: 22px solid #00C996;
+    width: 118px;
+    height: 118px;
+    position: absolute;
+    top: 63.5%;
+    left: 37%;
+}
+
+.container{
+    width: 118px;
+    margin-top: 7%;
+    margin-left:  53%;
+}
+
+.progressBar{
+    background-color: transparent;
+    border-radius: 100px;
+    border: 22px solid #00C996;
+    width: 118px;
+    height: 118px;
+    position: absolute;
+    top: 10%;
+    left:  53%;
+}
+
+.progressBarFill{
+    background-color: transparent;
+    border-radius: 100px;
+    border: 26px solid #7E13AB;
+    height: 100%;
+    transition: width 0.5s ease-out;
+    /*width: 118px;*/
+    /*height: 118px;*/
+    /*position: absolute;*/
+}
+
+.progressLabel{
+    color: #242424;
+    font-family: Montserrat;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.prog{
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    stroke: url(#color);
+    stroke-width:30;
+    stroke-dasharray:420;
+    stroke-dashoffset:420;
+    animation: anim 3s linear forwards;
+}
+
+@keyframes anim {
+    100%{
+        stroke-dashoffset: 150;
+    }
+}
