@@ -11,11 +11,11 @@ public class HREmployees
     [Column("hr_id")] [Required]public Guid HRId { get; set; }
     [Column("employee_id")] [Required] public Guid EmployeeId { get; set; }
 
-    public static HREmployees From(Account hr, Account employee)
+    public static HREmployees From(Guid hrId, Guid employeeId)
         => new()
         {
-            EmployeeId = employee.Id,
-            HRId = hr.Id,
+            EmployeeId = employeeId,
+            HRId = hrId,
             id = Guid.NewGuid()
         };
 }

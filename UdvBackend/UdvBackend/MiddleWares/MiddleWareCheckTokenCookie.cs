@@ -18,13 +18,20 @@ public class MiddleWareCheckTokenCookie
     private readonly ILog _log;
     private readonly IAccountRepository _accounts;
     private readonly ITokenRepository _tokens;
+    private readonly IRoleRepository _roles;
     
-    public MiddleWareCheckTokenCookie(RequestDelegate next, ILog log, IAccountRepository accounts, ITokenRepository tokens, IRoleRepository roleRepository)
+    public MiddleWareCheckTokenCookie(
+        RequestDelegate next,
+        ILog log,
+        IAccountRepository accounts,
+        ITokenRepository tokens,
+        IRoleRepository roles)
     {
         _next = next;
         _log = log;
         _accounts = accounts;
         _tokens = tokens;
+        _roles = roles;
     }
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
@@ -56,7 +63,15 @@ public class MiddleWareCheckTokenCookie
             return;
         }
 
-        accountScope.Account = accountResponse;
+        var role = await _roles.Get(accountResponse.RoleId);
+        
+        if (role == null)
+        {
+            _log.Warn("такой роли нету"); // написать ответ
+            return;
+        }
+        
+        accountScope.Account = AccountInfo.From(accountResponse, new []{role.Name});
         await _next(context);
     }
 }

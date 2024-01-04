@@ -8,7 +8,7 @@ using UdvBackend.Infrastructure.Repositories.ILinkEmployeesHR;
 using UdvBackend.Repositories;
 using Task = System.Threading.Tasks.Task;
 
-namespace UdvBackend.Infrastructure;
+namespace UdvBackend.Infrastructure.Repositories.BaseInitializer;
 
 public class RoleInitializers //todo: можно рефакторнуть
 {
@@ -23,8 +23,8 @@ public class RoleInitializers //todo: можно рефакторнуть
 
     public async Task InitializeAsync(IRoleRepository roles, IAccountRepository accounts,  ILinkEmployeesHr employeesHr)
     {
-        await AddAndSetRole(Roles.HR.NameRole, roles, Roles.CreateHRRoleSingleton);
-        await AddAndSetRole(Roles.Employee.NameRole, roles, Roles.CreateEmployeeRoleSingleton);
+        await AddAndSetRole(Roles.Hr, roles);
+        await AddAndSetRole(Roles.Employee, roles);
 
         var newUser = new RequestNewHr()
         {
@@ -35,7 +35,7 @@ public class RoleInitializers //todo: можно рефакторнуть
             LastName = BaseLastName
         };
 
-        var adminRole = await roles.Get(Roles.HR.NameRole);
+        var adminRole = await roles.Get(Roles.Hr);
         if (adminRole == null)
         {
             throw new Exception("RoleAdmin not Created");
@@ -49,28 +49,33 @@ public class RoleInitializers //todo: можно рефакторнуть
             admin = account;
         }
 
+        var employeeRole = await roles.Get(Roles.Employee);
+        if (employeeRole == null)
+        {
+            throw new Exception("RoleEmployee not Created");
+        }
+        
         var emplo = await accounts.Get("udv@mail.com");
-       
         if (!emplo.Exist())
         {
-            var empoloyee = CreateEmployee();
+            var empoloyee = CreateEmployee(employeeRole.Id);
             await accounts.Add(empoloyee);
-            await employeesHr.Connect(HREmployees.From(admin, empoloyee));
+            await employeesHr.Connect(HREmployees.From(admin.Id, empoloyee.Id));
         }
     }
 
-    private static Account CreateEmployee()
+    private static Account CreateEmployee(Guid employeeRoleId)
     {
         var password = "123123";
         var empoloyees = Account.From(new RequestNewEmployee()
         {
             Email = "udv@mail.com", MiddleName = "Журавлёв", Name = "Vadim", Surname = "heruco"
-        }, Roles.Employee.Id, password);
+        }, employeeRoleId, password);
         return empoloyees;
     }
     
 
-    private async Task AddAndSetRole(string nameRole, IRoleRepository roles, Action<Guid> action)
+    private async Task AddAndSetRole(string nameRole, IRoleRepository roles)
     {
         var role = await roles.Get(nameRole);
         if (role == null)
@@ -78,7 +83,5 @@ public class RoleInitializers //todo: можно рефакторнуть
             role = Role.From(nameRole);
             await roles.Add(role);
         }
-
-        action(role.Id);
     }
 }

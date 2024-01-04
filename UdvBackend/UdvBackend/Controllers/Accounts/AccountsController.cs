@@ -3,6 +3,7 @@ using EduControl.Controllers.Model;
 using EduControl.MiddleWare;
 using Microsoft.AspNetCore.Mvc;
 using UdvBackend.Infrastructure.Extnentions;
+using UdvBackend.Repositories;
 
 namespace UdvBackend.Controllers.Registered;
 
@@ -11,21 +12,16 @@ namespace UdvBackend.Controllers.Registered;
 public class AccountsController
 {
     private readonly AccountScope _accountScope;
-
-    public AccountsController(AccountScope accountScope)
+    public AccountsController(
+        AccountScope accountScope,
+        IRoleRepository roleRepository)
     {
         _accountScope = accountScope;
     }
 
     [HttpGet]
-    public ApiResult<ResponseAccountInfo> Get()
+    public async Task<ApiResult<AccountInfo>> Get()
     {
-        var role = _accountScope.Account.GetRole();
-        if (role == null)
-        {
-            return new ApiResult<ResponseAccountInfo>("this account without role", "this account must be remove", 406);
-        }
-
-        return ResponseAccountInfo.From(_accountScope.Account, role);
+        return _accountScope.Account;
     }
 }

@@ -21,12 +21,12 @@ namespace UdvBackend.Controllers.AdminController;
 [Route("api/hr")]
 public class HrController : ControllerBase
 {
-    private readonly IRoleRepository _roles;
     private readonly IAccountRepository _accounts;
     private readonly ILinkEmployeesHr _linkEmployeesHr;
     private readonly AccountScope _accountScope;
     private readonly IAccountService _accountService;
     private readonly ILog _log;
+    private readonly IRoleRepository _roles;
 
     public HrController(IRoleRepository roles,
         IAccountRepository accounts,
@@ -46,12 +46,14 @@ public class HrController : ControllerBase
     [HttpPost("create/hr")]
     public async Task<ApiResult<string>> Post([FromBody] RequestNewHr newHr)
     {
-        if (Roles.HR.Id == null)
+        var role = await _roles.Get(Roles.Hr);
+        if (role == null)
         {
-            throw new Exception("роль не была создана при иницилазицаий базы данных");
+            _log.Warn("нету роли Hr В бд");
+            return "Роли HR нету в базе данных";
         }
-
-        var account = Account.From(newHr, Roles.HR.Id);
+        
+        var account = Account.From(newHr, role.Id);
         await _accounts.Add(account);
 
         return "Account created"; //todo: а что выглядит неплохо, аха)(()
@@ -77,16 +79,19 @@ public class HrController : ControllerBase
     [HttpPost("Create/employee")]
     public async Task<ApiResult<ResponseAccountEmployeeAfterCreated>> Post([FromBody] RequestNewEmployee newAccount)
     {
-        if (Roles.Employee.Id == Guid.Empty)
+        var role = await _roles.Get(Roles.Employee);
+        if (role == null)
         {
-            throw new Exception("роли не была создана при иницилазицаий базы данных");
+            _log.Warn("нету роли работника В бд");
+            return new ApiResult<ResponseAccountEmployeeAfterCreated>("роли Employee нету", string.Empty, 500); // по идей здесь я бэк должен перезапускаться 
         }
-
+        
+        
         var password = new Password().Next();
-        var account = Account.From(newAccount, Roles.Employee.Id, password);
+        var account = Account.From(newAccount, role.Id, password);
         await _accounts.Add(account);
 
-        var hrEmployees = HREmployees.From(_accountScope.Account, account);
+        var hrEmployees = HREmployees.From(_accountScope.Account.Id, account.Id);
         await _linkEmployeesHr.Connect(hrEmployees);
 
         return new ApiResult<ResponseAccountEmployeeAfterCreated>(new ResponseAccountEmployeeAfterCreated()

@@ -1,5 +1,6 @@
 using EduControl.DataBase;
 using EduControl.DataBase.ModelBd;
+using EduControl.MiddleWare;
 using Microsoft.EntityFrameworkCore;
 using Vostok.Logging.Abstractions;
 using Task = UdvBackend.Domen.Entities.Task;
@@ -21,19 +22,17 @@ public class TaskRepository : ITaskRepository
         return await _db.Tasks.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public async Task<List<Task>> Get(Account account)
+    public async Task<List<Task>> GetAllByAccount(Guid idAccount)
     {
-        var tasks = await _db.Tasks.Where(x => x.AccountId == account.Id).ToListAsync();
+        var tasks = await _db.Tasks.Where(x => x.AccountId == idAccount).ToListAsync();
         return tasks;
     }
-
+    
     public async System.Threading.Tasks.Task Insert(Task task)
     {
         await _db.Tasks.AddAsync(task);
         await _db.SaveChangesAsync();
     }
-
-  
 
     public async Task<Task> ChangeComplete(Task task) // сделать с возвращением result
     {

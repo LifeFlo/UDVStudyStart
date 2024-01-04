@@ -6,7 +6,6 @@ namespace UdvBackend.Infrastructure.AccountService;
 
 public class AccountService : IAccountService
 {
-
     public readonly ITaskRepository _tasks;
 
     public AccountService(ITaskRepository tasks)
@@ -19,7 +18,7 @@ public class AccountService : IAccountService
         var result = new List<EmployeeInfo>();
         foreach (var myEmployee in accounts)
         {
-            var tasks = await _tasks.Get(myEmployee);
+            var tasks = await _tasks.GetAllByAccount(myEmployee.Id);
             var completeTask = tasks.Where(x => x.IsComplete).ToArray();
 
             result.Add(EmployeeInfo.From(myEmployee, completeTask.Length, tasks.Count));

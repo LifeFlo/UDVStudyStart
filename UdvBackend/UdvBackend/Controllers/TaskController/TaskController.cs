@@ -58,7 +58,7 @@ public class TaskController : ControllerBase
     [Route("employee/tasks")]
     public async Task<ApiResult<List<Task>>> GetTasksByUser()
     {
-        var tasks = await _tasks.Get(_accountScope.Account);
+        var tasks = await _tasks.GetAllByAccount(_accountScope.Account.Id);
 
         return tasks;
     }
@@ -83,7 +83,7 @@ public class TaskController : ControllerBase
                 string.Empty, 404);
         }
 
-        var tasks = await _tasks.Get(employee);
+        var tasks = await _tasks.GetAllByAccount(employee.Id);
 
         return tasks;
     }

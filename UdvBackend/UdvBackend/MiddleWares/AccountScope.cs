@@ -4,5 +4,5 @@ namespace EduControl.MiddleWare;
 
 public class AccountScope
 {
-    public Account Account { get; set; }
+    public AccountInfo Account { get; set; }
 }

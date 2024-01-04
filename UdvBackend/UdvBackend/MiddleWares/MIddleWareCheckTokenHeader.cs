@@ -4,7 +4,7 @@ using Vostok.Logging.Abstractions;
 
 namespace EduControl.MiddleWare;
 
-public class MIddleWareCheckTokenHeader
+public class MiddleWareCheckTokenHeader
 {
     
     private static readonly ApiResult<object> AccessTokenNotPresentError = new("auth:access-token-not-present", "insert an access_token as bearer in 'Authorization' header", 403);
@@ -16,21 +16,27 @@ public class MIddleWareCheckTokenHeader
     private readonly RequestDelegate next;
     private readonly IAccountRepository _accounts;
     private readonly ITokenRepository _tokens;
-    private readonly ILog log;
-
-    public MIddleWareCheckTokenHeader(RequestDelegate next, ILog log, ITokenRepository tokens, IAccountRepository accounts)
+    private readonly ILog _log;
+    private readonly IRoleRepository _roles;
+    public MiddleWareCheckTokenHeader(
+        RequestDelegate next, 
+        ILog log, 
+        ITokenRepository tokens,
+        IAccountRepository accounts, 
+        IRoleRepository roles)
     {
         this.next = next;
         _tokens = tokens;
         _accounts = accounts;
-        this.log = log.ForContext("AccessTokenMiddleware");
+        _roles = roles;
+        _log = log.ForContext("AccessTokenMiddleware");
     }
 
     public async Task InvokeAsync(HttpContext context, AccountScope accountScope)
     {
         if (!context.Request.Headers.TryGetValue("Authorization", out var authorization) || authorization.Count == 0)
         {
-            log.Warn("tried to access api without an access token");
+            _log.Warn("tried to access api without an access token");
             context.Response.StatusCode = 403;
             await context.Response.WriteAsJsonAsync(AccessTokenNotPresentError);
             return;
@@ -39,7 +45,7 @@ public class MIddleWareCheckTokenHeader
         var bearer = authorization[0];
         if (bearer.IndexOf(AuthorizationHeaderPrefix, StringComparison.InvariantCultureIgnoreCase) != 0)
         {
-            log.Warn("tried to access api with malformed token");
+            _log.Warn("tried to access api with malformed token");
             context.Response.StatusCode = 403;
             await context.Response.WriteAsJsonAsync(AccessTokenLooksNotABearerError);
             return;
@@ -60,16 +66,21 @@ public class MIddleWareCheckTokenHeader
         }
 
         var account = await _accounts.Get(accessToken);
-
         if (account == null)
         {
             context.Response.StatusCode = 403;
             await context.Response.WriteAsJsonAsync(TokenNotLinkAccount);
             return;
         }
-
-        accountScope.Account = account;
+        
+        var role = await _roles.Get(account.RoleId);
+        if (role == null)
+        {
+            _log.Warn("такой роли нету"); // написать ответ
+            return;
+        }
+        
+        accountScope.Account = AccountInfo.From(account, new []{role.Name});
         await next(context);
     }
-
 }
